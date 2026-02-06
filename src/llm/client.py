@@ -1,4 +1,5 @@
 import json
+import math
 import os
 
 from google import genai
@@ -40,6 +41,14 @@ async def call_pro_json(prompt: str, temperature: float = 0.3) -> dict:
     return json.loads(response.text)
 
 
+def _l2_normalize(vec: list[float]) -> list[float]:
+    """L2 normalize vector. Required for gemini-embedding-001 at <3072 dimensions."""
+    norm = math.sqrt(sum(x * x for x in vec))
+    if norm == 0:
+        return vec
+    return [x / norm for x in vec]
+
+
 async def embed(text: str, task_type: str = "RETRIEVAL_DOCUMENT") -> list[float]:
     client = _get_client()
     response = await client.aio.models.embed_content(
@@ -50,4 +59,7 @@ async def embed(text: str, task_type: str = "RETRIEVAL_DOCUMENT") -> list[float]
             output_dimensionality=768,
         ),
     )
-    return response.embeddings[0].values
+    raw = response.embeddings[0].values
+    # gemini-embedding-001 only pre-normalizes at 3072 dims
+    # At 768 or 1536 dims, we must normalize manually
+    return _l2_normalize(raw)

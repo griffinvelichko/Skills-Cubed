@@ -11,8 +11,8 @@ def test_env_defaults():
     """Model strings fall back to defaults when env vars are unset."""
     from src.llm import client
 
-    assert client.FLASH_MODEL == os.getenv("GEMINI_FLASH_MODEL", "gemini-2.0-flash")
-    assert client.PRO_MODEL == os.getenv("GEMINI_PRO_MODEL", "gemini-2.0-pro")
+    assert client.FLASH_MODEL == os.getenv("GEMINI_FLASH_MODEL", "gemini-3-flash-preview")
+    assert client.PRO_MODEL == os.getenv("GEMINI_PRO_MODEL", "gemini-3-pro-preview")
     assert client.EMBEDDING_MODEL == os.getenv(
         "GEMINI_EMBEDDING_MODEL", "gemini-embedding-001"
     )
@@ -62,6 +62,8 @@ async def test_call_pro_json_parses_response():
 
 
 async def test_embed_returns_values():
+    import math
+
     mock_embedding = MagicMock()
     mock_embedding.values = [0.1] * 768
 
@@ -78,7 +80,9 @@ async def test_embed_returns_values():
         result = await embed("test query", task_type="RETRIEVAL_QUERY")
 
     assert len(result) == 768
-    assert result[0] == 0.1
+    # Result is now L2 normalized, so check the norm instead of raw values
+    norm = math.sqrt(sum(x * x for x in result))
+    assert abs(norm - 1.0) < 1e-6, f"Expected normalized vector, got norm={norm}"
     call_args = mock_embed.call_args
     assert call_args.kwargs["contents"] == "test query"
 

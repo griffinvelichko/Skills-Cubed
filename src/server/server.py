@@ -1,6 +1,7 @@
 import os
 from contextlib import asynccontextmanager
 
+from dotenv import load_dotenv
 from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
 
@@ -8,6 +9,9 @@ from src.db import ensure_indexes
 from src.orchestration.search import search_skills_orchestration
 from src.orchestration.create import create_skill_orchestration
 from src.orchestration.update import update_skill_orchestration
+
+# Load .env for local development (Render sets env vars via dashboard)
+load_dotenv()
 
 
 @asynccontextmanager
