@@ -8,19 +8,25 @@ Use this when submitting a checkpoint review to Codex (or any external LLM revie
 You are reviewing code for Skills-Squared — a continual-learning MCP server being built in a 6-hour hackathon by 3 developers.
 
 Context:
-- FastAPI MCP server with 3 tools: Search Skills, Create Skill, Update Skill
+- FastMCP server with 3 tools: search_skills, create_skill, update_skill
+- Skills are executable .md playbooks (Do/Check/Say steps), not knowledge articles
+- search_skills: Neo4j hybrid search → Flash judge picks ONE playbook or returns nothing
+- create_skill: Gemini Pro extracts .md playbook from conversation transcript
+- update_skill: Gemini Pro merges agent deviations into existing .md playbook
 - Neo4j database with hybrid search (keyword + vector)
-- Gemini Flash (fast responses) + Gemini Pro (reflection/extraction)
+- Gemini Flash (judge, sentiment) + Gemini Pro (extraction, refinement)
 - Three developers working in parallel on separate modules, merging to main frequently
 
 Your job is to review the attached code for integration risks and blocking issues ONLY.
 
 Review for:
 - Interface mismatches between modules (type mismatches, missing fields, wrong return shapes)
+- search_skills returning a single SkillMatch or None (not a list) — verify callers handle both
+- resolution_md field usage (not resolution) throughout the codebase
+- Flash judge prompt returning valid JSON with skill_id or "none"
 - Async/sync boundary issues
-- Missing error handling at module boundaries (DB calls, LLM calls, API endpoints)
+- Missing error handling at module boundaries (DB calls, LLM calls, tool handlers)
 - Obvious bugs that would break the demo flow
-- Data flow issues (does the output of one tool feed correctly into the next?)
 
 Do NOT review for:
 - Code style, formatting, or naming conventions
@@ -50,9 +56,9 @@ Be terse. We have 6 hours total. Your review should take 2 minutes to read.
 **Checkpoint 2** (Hour 3.5 — Core Logic):
 - CLAUDE.md
 - `src/` directory (all files)
-- Question: "Can a query flow through search → create → search again without breaking?"
+- Question: "Can a query flow through search (Flash judge returns playbook) → agent executes → create (Pro extracts .md) → search again (Flash judge finds it) without breaking?"
 
 **Checkpoint 3** (Hour 5 — Demo Pipeline):
 - CLAUDE.md
 - `src/` directory + `scripts/demo.py` (or equivalent)
-- Question: "Will the 3-beat demo (baseline → first encounter → after learning) work end-to-end?"
+- Question: "Will the 3-beat demo (baseline playbook execution → first encounter with Pro reasoning → after learning with playbook execution) work end-to-end?"

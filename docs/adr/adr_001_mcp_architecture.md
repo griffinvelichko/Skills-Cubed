@@ -1,51 +1,55 @@
-# ADR 001: MCP Architecture — FastAPI Server with 3 Tools
+# ADR 001: MCP Architecture — FastMCP Server with 3 Tools
 
-**Status**: Accepted
+**Status**: Accepted (updated 2026-02-05)
 **Date**: 2026-02-05
-**Context**: Hackathon architecture decision, pre-sprint
+**Context**: Hackathon architecture decision, updated after research sprint
 
 ## Decision
 
-Build a FastAPI-based MCP server that exposes exactly 3 tools: Search Skills, Create Skill, Update Skill.
+Build a FastMCP-based server that exposes exactly 3 tools: `search_skills`, `create_skill`, `update_skill`. Skills are executable `.md` playbooks (Do/Check/Say action steps), not knowledge articles. The search tool uses Gemini Flash as a judge to return one matching playbook or nothing — no threshold-based scoring.
 
-## Why FastAPI
+## Why FastMCP
 
-- **Native async**: Neo4j and Gemini calls are I/O-bound. FastAPI's async support means we don't block on DB or LLM latency.
-- **Fast to build**: Decorator-based routing, automatic OpenAPI docs, Pydantic validation for free. Three experienced devs can have endpoints up in < 1 hour.
-- **MCP-compatible**: The MCP protocol is HTTP + JSON. FastAPI is the natural fit — no framework fighting.
-- **Team familiarity**: All three devs have built FastAPI services before.
+- **Protocol-native**: FastMCP handles all MCP protocol boilerplate — JSON-RPC framing, capability negotiation, tool discovery, session management. We write tool handlers, not protocol code.
+- **Decorator-based**: `@mcp.tool()` with type hints and docstrings auto-generates tool definitions (name, description, inputSchema). No manual JSON Schema.
+- **Transport-agnostic**: Same tool code works over stdio (local dev, Claude Desktop) and Streamable HTTP (hosted demo). Switch with one argument.
+- **FastAPI underneath**: FastMCP uses FastAPI internally. We get async, Pydantic validation, and can add non-MCP endpoints (health checks, admin) alongside.
 
 ## Why Exactly 3 Tools
 
-The product is a learning loop: **search** for existing knowledge, **create** new knowledge from successful resolutions, **update** existing knowledge when better patterns emerge. Every other feature is downstream of these three operations.
-
-We considered more granular tools (separate search by keyword vs vector, bulk create, delete, etc.) and rejected them:
-- More tools = more interface contracts = more integration risk in 6 hours
-- The 3-tool design maps cleanly to the demo's 3-beat story
-- Additional operations (delete, bulk import) can be added post-hackathon without changing the core architecture
+The product is a learning loop: **search** for an existing playbook, **create** a new playbook from a successful resolution, **update** a playbook when the agent had to deviate. Every other feature is downstream.
 
 ## Tool Routing
 
 ```
-Client (Fin/Claude) → MCP Server (FastAPI)
-                          ├── /search  → Neo4j hybrid query → return skills
-                          ├── /create  → Gemini Pro extraction → Neo4j write → confirm
-                          └── /update  → Gemini Pro refinement → Neo4j update → confirm
-```
+Agent (Fin/Claude) → MCP Server (FastMCP)
+  └── tools/call "search_skills"
+        → Neo4j hybrid search → top candidates
+        → Flash judge: "Does any playbook solve this?" → ONE skill or NONE
+        → Agent executes playbook or reasons from scratch
 
-Each tool is a single endpoint. No middleware chains, no plugin systems, no tool orchestration layer. The server is a thin router between the client and the backend services.
+  └── tools/call "create_skill"  (post-conversation)
+        → Gemini Pro extracts .md playbook from transcript
+        → db.check_duplicate → Neo4j write → return skill
+
+  └── tools/call "update_skill"  (post-conversation)
+        → db.get_skill → Gemini Pro refines .md → Neo4j update → return changes
+```
 
 ## Alternatives Considered
 
 | Option | Why Rejected |
 |--------|-------------|
 | LangChain/LangGraph | Too much abstraction for 3 tools. Framework overhead > value. |
-| Raw HTTP server | Lose Pydantic validation, async support, auto docs. |
+| Raw FastAPI (no FastMCP) | Works but requires manual JSON-RPC, capability negotiation, tool discovery. FastMCP handles all of this. |
 | gRPC | Team less familiar. Overkill for a hackathon demo. |
 | Serverless (Cloud Functions) | Cold starts hurt the demo. Need persistent Neo4j connections. |
+| Threshold-based routing (no LLM judge) | Retrieval scores aren't calibrated. Magic numbers require per-domain tuning. Flash judge makes semantic decisions. |
 
 ## Consequences
 
-- All three devs can work on their modules independently and integrate at the FastAPI layer
-- Server module is Josh's responsibility — Torrin and Griffin build clients that the server calls
-- If we need a 4th tool, adding one is trivial (one new endpoint + handler)
+- Josh owns FastMCP server setup (`src/server/`), transport config, hosting
+- Griffin owns tool handler logic (`src/orchestration/`), Flash judge prompt, Pro extraction/refinement prompts
+- Torrin owns Neo4j queries called by the handlers (`src/db/`, `src/skills/`)
+- Tools are discoverable via `tools/list` — any MCP client auto-integrates
+- Adding a 4th tool is one `@mcp.tool()` decorator

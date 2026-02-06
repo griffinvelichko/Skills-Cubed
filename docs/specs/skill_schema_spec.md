@@ -1,6 +1,8 @@
 # Skill Schema Specification
 
-A "skill" is a structured document representing a learned resolution pattern. This is what gets stored in Neo4j, returned by search, created from conversations, and refined over time.
+A "skill" is an **executable playbook for an AI agent**. It is NOT a knowledge article or canned response for the customer. A skill tells the agent exactly what actions to take, what APIs to call, what conditions to check, and what to communicate to the customer at each step. The goal: Gemini Flash can execute a known playbook instead of Gemini Pro having to figure out the playbook from scratch.
+
+Skills are written as **structured natural language in markdown format**. The agent reads the skill internally and executes it — the customer never sees the skill document.
 
 ## Schema
 
@@ -8,21 +10,21 @@ A "skill" is a structured document representing a learned resolution pattern. Th
 class Skill(BaseModel):
     # Identity
     skill_id: str             # UUID, generated on creation
-    title: str                # Short, descriptive title (e.g., "Password Reset for Enterprise SSO Users")
+    title: str                # Short, descriptive title (e.g., "Password Reset for Standard Users")
     version: int = 1          # Incremented on each update
 
     # Content
     problem: str              # What issue does this skill address?
-    resolution: str           # Step-by-step resolution (the actual value)
+    resolution_md: str        # Markdown playbook: agent-directed actions (see "Skill Markdown Format" below)
     conditions: list[str]     # When does this skill apply? (e.g., ["user is on enterprise plan", "SSO is enabled"])
     keywords: list[str]       # Explicit keyword tags for BM25 search
 
     # Embeddings
-    embedding: list[float]    # Vector embedding of problem + resolution text (for semantic search)
+    embedding: list[float]    # Vector embedding of problem + conditions + keywords (NOT resolution — users search by problem, not solution)
 
     # Metadata
     product_area: str = ""    # e.g., "billing", "authentication", "onboarding"
-    issue_type: str = ""      # e.g., "how-to", "bug", "feature-request"
+    issue_type: str = ""      # e.g., "how-to", "bug", "feature-request", "escalation"
     confidence: float = 0.5   # 0-1, increases with successful uses and positive feedback
     times_used: int = 0       # How many times this skill was returned by search
     times_confirmed: int = 0  # How many times use led to confirmed resolution
@@ -32,18 +34,69 @@ class Skill(BaseModel):
     updated_at: str           # ISO 8601
 ```
 
+## Skill Markdown Format
+
+The `resolution_md` field contains a markdown document written **for the agent, not the customer**. It uses structured natural language so any LLM can interpret and execute it without a custom parser or DSL.
+
+A skill `.md` follows this structure:
+
+```markdown
+# [Skill Title]
+
+**Confidence:** 0.85 (23 uses, 20 confirmed)
+**Product Area:** billing
+**Issue Type:** how-to
+
+## Goal
+One-sentence description of what this skill accomplishes.
+
+## Prerequisites
+- Conditions that must be true before executing (maps to `conditions` field)
+- e.g., "Customer has a verified email on file"
+
+## Steps
+
+### 1. [Action description]
+**Do:** [What the agent should do — API call, lookup, calculation, etc.]
+**Check:** [What to verify before proceeding]
+**Say:** [What to tell the customer, if anything]
+
+### 2. [Action description]
+**Do:** [Next action]
+**Check:** [Verification]
+**Say:** [Customer communication]
+
+...
+
+## Edge Cases
+- [Condition] → [What to do instead]
+- [Condition] → [Escalation instruction]
+
+## Escalation
+When to stop and hand off to a human, and what context to pass along.
+```
+
+The confidence header tells the agent how much to trust this playbook. A skill at 0.9 can be followed mechanically. A skill at 0.5 should be treated as a starting point — the agent should verify each step and be ready to deviate.
+
+The `Do/Check/Say` pattern gives the agent clear, separable instructions:
+- **Do** = internal action (API call, data lookup, calculation)
+- **Check** = gate before proceeding (condition, validation, error check)
+- **Say** = customer-facing communication
+
+This is structured enough for Flash to follow mechanically, but flexible enough that Pro can generate it from messy conversation transcripts.
+
 ## Neo4j Node Structure
 
 ```cypher
 (:Skill {
     skill_id: "uuid-here",
-    title: "Password Reset for Enterprise SSO Users",
+    title: "Password Reset for Standard Users",
     version: 1,
-    problem: "Customer cannot reset password because...",
-    resolution: "1. Navigate to admin console\n2. ...",
-    conditions: ["user is on enterprise plan", "SSO is enabled"],
-    keywords: ["password", "reset", "SSO", "enterprise"],
-    embedding: [0.123, -0.456, ...],  // vector index
+    problem: "Customer cannot log in and wants to reset their password",
+    resolution_md: "# Password Reset for Standard Users\n\n**Confidence:** 0.75 ...",  // full .md playbook
+    conditions: ["user is NOT on SSO/enterprise plan", "user has a verified email on file"],
+    keywords: ["password", "reset", "login", "locked out"],
+    embedding: [0.123, -0.456, ...],  // vector index (embeds problem + conditions + keywords, NOT resolution)
     product_area: "authentication",
     issue_type: "how-to",
     confidence: 0.75,
@@ -75,7 +128,7 @@ Embedding dimension is configurable via `EMBEDDING_DIM` env var (default: 768, G
 ```cypher
 CREATE FULLTEXT INDEX skill_keywords IF NOT EXISTS
 FOR (n:Skill)
-ON EACH [n.title, n.problem, n.resolution, n.keywords]
+ON EACH [n.title, n.problem, n.resolution_md, n.keywords]
 ```
 
 ## Hybrid Search Query
@@ -107,21 +160,31 @@ The exact hybrid scoring formula can be tuned. Start with 70/30 vector/keyword a
 
 ## Confidence Scoring
 
-Confidence starts at 0.5 (neutral) and adjusts:
-- **+0.1** on each confirmed resolution (`times_confirmed++`)
-- **-0.05** on each use without confirmation (used but user sentiment was negative or neutral)
+Confidence starts at 0.5 (neutral) and adjusts based on resolution outcomes:
+- **+0.10** on confirmed resolution (`times_confirmed++`)
+- **+0.03** on likely resolution (positive signals but no explicit confirmation)
+- **-0.05** on likely failure (negative signals)
+- **-0.10** on confirmed failure (explicit negative feedback or escalation)
+- **+0.01** on use without feedback (slight positive bias for being selected)
 - Clamped to [0.0, 1.0]
+
+The confidence score is embedded in the skill's `.md` header so the LLM-as-judge can
+factor it into routing decisions. A skill with confidence < 0.3 has failed often and the
+judge should treat it skeptically. The confidence score also tells the executing agent
+how much to trust the playbook — high confidence means follow mechanically, low
+confidence means verify each step.
 
 This is a simple heuristic. Good enough for the demo. Don't over-engineer the scoring formula.
 
 ## Skill Lifecycle
 
 ```
-Conversation → LLM extraction (Pro) → Create Skill (confidence=0.5)
-    → Used in Search → times_used++
-        → Positive feedback → times_confirmed++, confidence++
-        → Negative feedback → confidence--
-    → Update from new conversation → version++, resolution refined
+Conversation → Pro reasons from scratch → Customer satisfied
+    → create_skill → Pro extracts .md playbook → Create Skill (confidence=0.5)
+    → Flash judge returns skill on future queries → times_used++
+        → Customer satisfied, no deviation → CONFIRM → times_confirmed++, confidence++
+        → Customer satisfied, agent deviated → UPDATE → Pro refines .md, version++
+        → Customer unsatisfied → DOWNGRADE → confidence--
 ```
 
 ## Example Skill Document
@@ -132,7 +195,7 @@ Conversation → LLM extraction (Pro) → Create Skill (confidence=0.5)
     "title": "Resolve Billing Discrepancy for Annual Plan Downgrade",
     "version": 2,
     "problem": "Customer was charged the full annual rate after downgrading mid-cycle. They expect a prorated refund for the remaining months.",
-    "resolution": "1. Verify the downgrade date in the billing system\n2. Calculate prorated amount: (remaining_months / 12) * annual_rate\n3. Issue refund via Stripe dashboard\n4. Confirm with customer and provide refund timeline (3-5 business days)\n5. Note: If downgrade was > 30 days ago, escalate to billing manager",
+    "resolution_md": "see below",
     "conditions": [
         "customer is on annual plan",
         "downgrade occurred mid-billing-cycle",
@@ -148,6 +211,56 @@ Conversation → LLM extraction (Pro) → Create Skill (confidence=0.5)
     "created_at": "2026-02-05T10:30:00Z",
     "updated_at": "2026-02-05T14:15:00Z"
 }
+```
+
+### Example `resolution_md` Content
+
+This is what the agent reads and executes. The customer never sees this.
+
+```markdown
+# Resolve Billing Discrepancy for Annual Plan Downgrade
+
+**Confidence:** 0.75 (8 uses, 6 confirmed)
+**Product Area:** billing
+**Issue Type:** how-to
+
+## Goal
+Issue a prorated refund for a customer who was overcharged after downgrading their annual plan mid-cycle.
+
+## Prerequisites
+- Customer is on an annual billing plan
+- A downgrade occurred mid-billing-cycle
+- Customer is requesting a refund
+
+## Steps
+
+### 1. Look up the downgrade date
+**Do:** Call GET /api/billing/subscriptions/{customer_id} → find the `downgrade_date` field
+**Check:** Confirm `downgrade_date` exists and is within the current billing cycle
+**Say:** "Let me pull up your billing details now."
+
+### 2. Calculate the prorated refund
+**Do:** remaining_months = months between downgrade_date and cycle_end. refund = (remaining_months / 12) * annual_rate
+**Check:** refund amount is > $0 and less than the full annual charge
+**Say:** Nothing yet — confirm the number before telling the customer.
+
+### 3. Issue the refund
+**Do:** Call POST /api/billing/refunds with { customer_id, amount, reason: "prorated_downgrade" }
+**Check:** Response status is 200 and refund_id is returned
+**Say:** "I've issued a refund of ${amount} to your original payment method. You should see it within 3-5 business days."
+
+### 4. Confirm with customer
+**Do:** Nothing — wait for customer acknowledgment
+**Check:** Customer confirms they understand the timeline
+**Say:** "Is there anything else I can help you with?"
+
+## Edge Cases
+- Downgrade was > 30 days ago → escalate to billing manager, do not issue refund directly
+- Refund API returns error → tell customer "I'm escalating this to our billing team" and create an internal ticket
+- Customer disputes the prorated amount → walk through the calculation transparently, show the math
+
+## Escalation
+If the refund amount exceeds $500 or the downgrade is older than 30 days, hand off to a billing manager with: customer_id, downgrade_date, calculated refund amount, and conversation transcript.
 ```
 
 ## What NOT To Over-Engineer
