@@ -4,8 +4,6 @@ from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
-from starlette.middleware import Middleware
-from starlette.middleware.cors import CORSMiddleware
 
 from src.db import ensure_indexes
 from src.orchestration.search import search_skills_orchestration
@@ -25,14 +23,6 @@ async def lifespan(server):
 mcp = FastMCP(
     "skills-cubed",
     lifespan=lifespan,
-    middleware=[
-        Middleware(
-            CORSMiddleware,
-            allow_origins=["*"],
-            allow_methods=["*"],
-            allow_headers=["*"],
-        ),
-    ],
 )
 
 
