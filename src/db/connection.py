@@ -11,7 +11,7 @@ async def get_driver():
     global _driver
     if _driver is None:
         uri = os.environ["NEO4J_URI"]
-        user = os.environ["NEO4J_USERNAME"]
+        user = os.environ.get("NEO4J_USERNAME") or os.environ["NEO4J_USER"]
         password = os.environ["NEO4J_PASSWORD"]
         _driver = AsyncGraphDatabase.driver(uri, auth=(user, password))
     return _driver
