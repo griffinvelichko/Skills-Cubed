@@ -20,7 +20,11 @@ async def lifespan(server):
     yield
 
 
-mcp = FastMCP("skills-cubed", lifespan=lifespan)
+mcp = FastMCP(
+    "skills-cubed",
+    lifespan=lifespan,
+    cors_allow_origins=["*"],
+)
 
 
 @mcp.tool()
