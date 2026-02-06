@@ -1,13 +1,10 @@
 import os
 from contextlib import asynccontextmanager
 
-import uvicorn
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
-from starlette.applications import Starlette
 from starlette.responses import JSONResponse
-from starlette.routing import Mount, Route
 
 from src.db import ensure_indexes
 from src.orchestration.search import search_skills_orchestration
@@ -27,7 +24,18 @@ async def lifespan(server):
 mcp = FastMCP(
     "skills-cubed",
     lifespan=lifespan,
+    stateless_http=True,
 )
+
+
+@mcp.custom_route("/", methods=["GET", "HEAD"])
+async def root(request):
+    return JSONResponse({"status": "ok"})
+
+
+@mcp.custom_route("/health", methods=["GET"])
+async def health(request):
+    return JSONResponse({"status": "ok"})
 
 
 @mcp.tool()
@@ -82,19 +90,6 @@ async def update_skill(
         raise ToolError(str(e)) from e
 
 
-async def health(request):
-    return JSONResponse({"status": "ok"})
-
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
-    mcp_app = mcp.http_app(path="/mcp", stateless_http=True)
-    app = Starlette(
-        routes=[
-            Route("/", health),
-            Route("/health", health),
-            Mount("/", app=mcp_app),
-        ],
-        lifespan=mcp_app.lifespan,
-    )
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    mcp.run(transport="http", host="0.0.0.0", port=port)
