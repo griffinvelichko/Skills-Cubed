@@ -1,4 +1,5 @@
 import json
+import re
 import time
 
 from src.db import queries as db
@@ -54,7 +55,10 @@ async def search_skills_orchestration(query: str) -> SearchResponse:
     formatted = _format_candidates(candidates)
     judge_prompt = JUDGE_PROMPT.format(query=query, candidates=formatted)
     judge_response = await call_flash(judge_prompt)
-    result = json.loads(judge_response)
+    # Strip markdown fences if the model wraps the JSON
+    cleaned = re.sub(r"^```(?:json)?\s*", "", judge_response.strip())
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+    result = json.loads(cleaned)
 
     chosen_id = result.get("skill_id", "none")
 
