@@ -60,7 +60,7 @@ cp .env.example .env
 python src/server/server.py
 ```
 
-The server starts on port 8000 by default. Set the `PORT` environment variable to override.
+The server starts on port 8000 by default. Set the `PORT` environment variable to override. Health checks are available at `/` and `/health`.
 
 ### Docker
 
