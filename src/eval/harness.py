@@ -1,11 +1,12 @@
-"""Evaluation harness — 3-phase benchmark over ABCD conversations.
+"""Evaluation harness — measures resolution quality improvement via continual learning.
 
 Phases:
-  1. Baseline — search-only pass (no eval skills exist yet → hit rate is 0%)
-  2. Learning — sequential pass creating/updating skills from train split
-  3. Post-learning — re-run dev split to measure improvement over baseline
+  1. Baseline — Flash resolves each conversation with NO skill access. LLM judge scores.
+  2. Continual — Flash resolves with skill search. Creates/updates skills as it goes.
+     Skills from conversation N are available for conversation N+1.
 
-Each phase outputs dual MetricsTracker views (eval_scoped + global).
+Same conversations run in both phases. The improvement curve shows judge scores
+rising in continual as skills accumulate, vs flat baseline.
 """
 
 import asyncio
@@ -13,12 +14,13 @@ import gzip
 import json
 import logging
 import os
+import re
 import time
 import uuid
 from dataclasses import asdict
 from pathlib import Path
 
-from src.eval.metrics import ConversationMetrics, MetricsTracker
+from src.eval.metrics import ConversationMetrics, AggregateMetrics
 from src.eval.resolution import determine_resolution
 
 logger = logging.getLogger(__name__)
@@ -50,16 +52,12 @@ def load_dataset(split: str) -> list[dict]:
 
 
 def load_kb() -> dict:
-    """Load kb.json ground truth (subflow -> expected action sequence)."""
     with open(DATA_DIR / "kb.json") as f:
         return json.load(f)
 
 
 def extract_query(conversation: dict) -> str:
-    """First 1-3 customer utterances before any action occurs.
-
-    Simulates what a real customer would type as their initial query.
-    """
+    """First 1-3 customer utterances before any action occurs."""
     lines = []
     for turn in conversation.get("original", []):
         speaker = turn[0]
@@ -73,6 +71,19 @@ def extract_query(conversation: dict) -> str:
     return " ".join(lines) if lines else ""
 
 
+def extract_ground_truth(conversation: dict) -> str:
+    """Extract agent turns + actions as the ground truth resolution."""
+    lines = []
+    for turn in conversation.get("original", []):
+        speaker = turn[0]
+        text = turn[1]
+        if speaker == "agent":
+            lines.append(f"Agent: {text}")
+        elif speaker == "action":
+            lines.append(f"[Action: {text}]")
+    return "\n".join(lines)
+
+
 def format_conversation(conversation: dict) -> str:
     """Format full conversation as readable text for create/update."""
     lines = []
@@ -84,14 +95,51 @@ def format_conversation(conversation: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Prompts
+# ---------------------------------------------------------------------------
+
+RESOLVE_PROMPT = """\
+You are a customer service agent. A customer has the following issue:
+
+{query}
+{skill_section}
+Provide a clear, specific resolution to the customer's issue. Include concrete steps the customer or agent should take. Be concise but thorough."""
+
+RESOLVE_SKILL_SECTION = """
+You have this resolution playbook to guide your response:
+{skill_context}
+"""
+
+JUDGE_PROMPT = """\
+You are evaluating an AI customer service agent's response quality.
+
+CUSTOMER ISSUE:
+{query}
+
+GROUND TRUTH RESOLUTION (from expert human agent):
+{ground_truth}
+
+AI AGENT'S PROPOSED RESOLUTION:
+{resolution}
+
+Rate the AI's resolution on a scale of 1-5:
+1 = Completely wrong, irrelevant, or harmful advice
+2 = Addresses the topic but misses key steps or gives incorrect info
+3 = Partially correct, covers some important steps but incomplete
+4 = Good resolution, covers most important aspects correctly
+5 = Excellent, matches or exceeds ground truth quality
+
+Return ONLY valid JSON: {{"score": N, "reasoning": "brief explanation"}}"""
+
+
+# ---------------------------------------------------------------------------
 # Retry helper for transient API errors (503, rate limits)
 # ---------------------------------------------------------------------------
 
 MAX_RETRIES = 4
-BACKOFF_BASE = 2.0  # seconds — doubles each retry: 2, 4, 8, 16
+BACKOFF_BASE = 2.0
 
 async def _retry(coro_fn, *args, label: str = ""):
-    """Call an async function with exponential backoff on transient errors."""
     for attempt in range(MAX_RETRIES + 1):
         try:
             return await coro_fn(*args)
@@ -106,29 +154,67 @@ async def _retry(coro_fn, *args, label: str = ""):
 
 
 # ---------------------------------------------------------------------------
+# Resolution generation & judging
+# ---------------------------------------------------------------------------
+
+async def generate_resolution(query: str, skill_context: str | None = None) -> str:
+    from src.llm.client import call_flash
+
+    if skill_context:
+        skill_section = RESOLVE_SKILL_SECTION.format(skill_context=skill_context)
+    else:
+        skill_section = ""
+
+    prompt = RESOLVE_PROMPT.format(query=query, skill_section=skill_section)
+    return await call_flash(prompt)
+
+
+async def judge_resolution(query: str, resolution: str, ground_truth: str) -> float:
+    from src.llm.client import call_flash
+
+    prompt = JUDGE_PROMPT.format(query=query, resolution=resolution, ground_truth=ground_truth)
+    response = await call_flash(prompt)
+
+    # Parse score from JSON response
+    try:
+        cleaned = re.sub(r"^```(?:json)?\s*", "", response.strip())
+        cleaned = re.sub(r"\s*```$", "", cleaned)
+        result = json.loads(cleaned)
+        score = float(result["score"])
+        return max(1.0, min(5.0, score))  # clamp to [1, 5]
+    except (json.JSONDecodeError, KeyError, ValueError, TypeError):
+        logger.warning("Judge returned unparseable response, defaulting to 3.0: %s", response[:100])
+        return 3.0
+
+
+async def _increment_times_used(skill_id: str):
+    from src.db.connection import get_driver
+
+    driver = await get_driver()
+    async with driver.session() as session:
+        result = await session.run(
+            "MATCH (s:Skill {skill_id: $sid}) SET s.times_used = coalesce(s.times_used, 0) + 1",
+            sid=skill_id,
+        )
+        await result.consume()
+
+
+# ---------------------------------------------------------------------------
 # Evaluation Harness
 # ---------------------------------------------------------------------------
 
 class EvaluationHarness:
     def __init__(self):
         self.kb = load_kb()
-        self._eval_owned_ids: set[str] = set()
+        self._eval_skill_ids: set[str] = set()
         self._run_prefix = os.getenv("EVAL_RUN_PREFIX", "torrin:")
         self._run_id = f"{self._run_prefix}{str(uuid.uuid4())[:8]}"
 
     async def setup(self):
-        """Call before first phase: ensure indexes exist."""
         from src.db import ensure_indexes
         await ensure_indexes()
 
     async def clear_eval_skills(self, clear_legacy: bool = False):
-        """Delete eval-owned Skill nodes. Leaves teammate/demo data intact.
-
-        Args:
-            clear_legacy: Also remove old un-prefixed eval skills (eval_run
-                          IS NOT NULL but contains no ':'). Use once to clean
-                          up pre-prefix runs that could block new creates.
-        """
         from src.db.connection import get_driver
 
         driver = await get_driver()
@@ -147,34 +233,27 @@ class EvaluationHarness:
                     "AND NOT s.eval_run CONTAINS ':' DETACH DELETE s"
                 )
                 legacy_summary = await result.consume()
-                legacy_deleted = legacy_summary.counters.nodes_deleted
-                logger.info("Cleared %d legacy (un-prefixed) eval skill nodes", legacy_deleted)
+                logger.info("Cleared %d legacy eval skill nodes", legacy_summary.counters.nodes_deleted)
 
-        self._eval_owned_ids.clear()
+        self._eval_skill_ids.clear()
 
     async def _tag_eval_skill(self, skill_id: str):
-        """Tag a newly-created skill with the current eval run ID."""
         from src.db.connection import get_driver
 
         driver = await get_driver()
         async with driver.session() as session:
             result = await session.run(
                 "MATCH (s:Skill {skill_id: $sid}) SET s.eval_run = $run_id",
-                sid=skill_id,
-                run_id=self._run_id,
+                sid=skill_id, run_id=self._run_id,
             )
             await result.consume()
 
-    async def run_baseline(self, conversations: list[dict]) -> dict[str, MetricsTracker]:
-        """Phase 1: search pass with eval-scope filtering.
+    async def run_baseline(self, conversations: list[dict]) -> list[ConversationMetrics]:
+        """Baseline: Flash resolves each conversation with NO skill access.
 
-        No eval skills exist yet, so eval-scoped hit rate is genuinely 0%.
-        Global tracker still records any pre-existing skill hits.
+        Establishes the quality floor — what Flash can do on its own.
         """
-        from src.orchestration.search import search_skills_orchestration
-
-        eval_tracker = MetricsTracker()
-        global_tracker = MetricsTracker()
+        results = []
         skipped = 0
 
         for i, conv in enumerate(conversations):
@@ -189,55 +268,42 @@ class EvaluationHarness:
                     skipped += 1
                     continue
 
+                ground_truth = extract_ground_truth(conv)
+
                 start = time.monotonic()
-                result = await _retry(search_skills_orchestration, query, label=f"baseline:{i}")
+                resolution = await _retry(generate_resolution, query, None, label=f"baseline-resolve:{i}")
+                score = await _retry(judge_resolution, query, resolution, ground_truth, label=f"baseline-judge:{i}")
                 elapsed = (time.monotonic() - start) * 1000
 
-                raw_hit = result.skill is not None
-                eval_hit = raw_hit and result.skill.skill_id in self._eval_owned_ids
-
                 conv_id = str(conv.get("convo_id", i))
-
-                eval_tracker.record(ConversationMetrics(
+                results.append(ConversationMetrics(
                     conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if eval_hit else "pro",
-                    skill_found=eval_hit,
-                    used_pro_fallback=not eval_hit,
+                    judge_score=score,
+                    skill_used=False,
                     resolution_time_ms=elapsed,
                 ))
 
-                global_tracker.record(ConversationMetrics(
-                    conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if raw_hit else "pro",
-                    skill_found=raw_hit,
-                    used_pro_fallback=not raw_hit,
-                    resolution_time_ms=elapsed,
-                ))
+                logger.info("Baseline [%d]: score=%.1f time=%.0fms", i, score, elapsed)
 
             except Exception:
                 logger.exception("Baseline error on conversation %d", i)
                 continue
 
-        logger.info("Baseline complete: %d processed, %d skipped", len(eval_tracker._metrics), skipped)
-        return {"eval_scoped": eval_tracker, "global": global_tracker}
+        logger.info("Baseline complete: %d scored, %d skipped, avg=%.2f",
+                     len(results), skipped,
+                     sum(r.judge_score for r in results) / len(results) if results else 0)
+        return results
 
-    async def run_learning(
-        self,
-        conversations: list[dict],
-        checkpoint_interval: int = 100,
-    ) -> dict[str, MetricsTracker]:
-        """Phase 2: sequential pass with skill creation and updates.
+    async def run_continual(self, conversations: list[dict]) -> list[ConversationMetrics]:
+        """Continual learning: search → resolve → judge → create/update.
 
-        Tracks eval_owned_ids to isolate from teammate/demo data.
+        Skills from conversation N are immediately available for N+1.
         """
         from src.orchestration.create import create_skill_orchestration
         from src.orchestration.search import search_skills_orchestration
         from src.orchestration.update import update_skill_orchestration
 
-        eval_tracker = MetricsTracker()
-        global_tracker = MetricsTracker()
+        results = []
         skipped = 0
 
         for i, conv in enumerate(conversations):
@@ -252,181 +318,87 @@ class EvaluationHarness:
                     skipped += 1
                     continue
 
+                ground_truth = extract_ground_truth(conv)
+
+                # Search for existing skills
                 start = time.monotonic()
-                result = await _retry(search_skills_orchestration, query, label=f"learn:{i}")
+                search_result = await _retry(search_skills_orchestration, query, label=f"continual-search:{i}")
+                skill_hit = search_result.skill is not None
+
+                # Generate resolution — with or without skill context
+                skill_context = None
+                skill_id = None
+                if skill_hit:
+                    skill_context = search_result.skill.resolution_md
+                    skill_id = search_result.skill.skill_id
+                    await _increment_times_used(skill_id)
+
+                resolution = await _retry(generate_resolution, query, skill_context, label=f"continual-resolve:{i}")
+
+                # Judge the resolution
+                score = await _retry(judge_resolution, query, resolution, ground_truth, label=f"continual-judge:{i}")
                 elapsed = (time.monotonic() - start) * 1000
 
-                raw_hit = result.skill is not None
-                eval_hit = raw_hit and result.skill.skill_id in self._eval_owned_ids
-
-                # Create/update control flow
-                if resolved and not raw_hit:
-                    # No skill at all — create new
+                # Learn: create or update skill from this conversation
+                if resolved and not skill_hit:
                     formatted = format_conversation(conv)
                     try:
                         create_result = await _retry(create_skill_orchestration, formatted, label=f"create:{i}")
                         if create_result.created:
-                            self._eval_owned_ids.add(create_result.skill_id)
+                            self._eval_skill_ids.add(create_result.skill_id)
                             await self._tag_eval_skill(create_result.skill_id)
                     except Exception:
                         logger.exception("Create failed on conversation %d", i)
 
-                elif resolved and eval_hit:
-                    # Eval-owned skill found — update it
+                elif resolved and skill_hit:
                     formatted = format_conversation(conv)
                     try:
-                        await _retry(update_skill_orchestration, result.skill.skill_id, formatted, label=f"update:{i}")
+                        await _retry(update_skill_orchestration, skill_id, formatted, label=f"update:{i}")
                     except Exception:
                         logger.exception("Update failed on conversation %d", i)
 
-                # resolved AND raw_hit AND NOT eval_hit → non-eval skill, read-only
-
                 conv_id = str(conv.get("convo_id", i))
-
-                eval_tracker.record(ConversationMetrics(
+                results.append(ConversationMetrics(
                     conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if eval_hit else "pro",
-                    skill_found=eval_hit,
-                    used_pro_fallback=not eval_hit,
+                    judge_score=score,
+                    skill_used=skill_hit,
+                    skill_id=skill_id,
                     resolution_time_ms=elapsed,
                 ))
 
-                global_tracker.record(ConversationMetrics(
-                    conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if raw_hit else "pro",
-                    skill_found=raw_hit,
-                    used_pro_fallback=not raw_hit,
-                    resolution_time_ms=elapsed,
-                ))
-
-                # Periodic checkpoint
-                processed = len(eval_tracker._metrics)
-                if checkpoint_interval and processed % checkpoint_interval == 0:
-                    label = f"learning_{processed}"
-                    eval_tracker.checkpoint(label)
-                    global_tracker.checkpoint(label)
-                    logger.info("Checkpoint at %d conversations", processed)
+                logger.info("Continual [%d]: score=%.1f skill=%s skills_total=%d time=%.0fms",
+                            i, score, skill_id or "none", len(self._eval_skill_ids), elapsed)
 
             except Exception:
-                logger.exception("Learning error on conversation %d", i)
+                logger.exception("Continual error on conversation %d", i)
                 continue
 
         logger.info(
-            "Learning complete: %d processed, %d skipped, %d eval skills created",
-            len(eval_tracker._metrics), skipped, len(self._eval_owned_ids),
+            "Continual complete: %d scored, %d skipped, %d skills created, avg=%.2f",
+            len(results), skipped, len(self._eval_skill_ids),
+            sum(r.judge_score for r in results) / len(results) if results else 0,
         )
-        return {"eval_scoped": eval_tracker, "global": global_tracker}
-
-    async def run_post_learning(self, conversations: list[dict]) -> dict[str, MetricsTracker]:
-        """Phase 3: re-run dev split to show improvement over baseline.
-
-        Same eval-scope filtering as baseline — only eval-owned skill hits count.
-        """
-        from src.orchestration.search import search_skills_orchestration
-
-        eval_tracker = MetricsTracker()
-        global_tracker = MetricsTracker()
-        skipped = 0
-
-        for i, conv in enumerate(conversations):
-            try:
-                resolved = determine_resolution(conv, self.kb)
-                if resolved is None:
-                    skipped += 1
-                    continue
-
-                query = extract_query(conv)
-                if not query:
-                    skipped += 1
-                    continue
-
-                start = time.monotonic()
-                result = await _retry(search_skills_orchestration, query, label=f"post:{i}")
-                elapsed = (time.monotonic() - start) * 1000
-
-                raw_hit = result.skill is not None
-                eval_hit = raw_hit and result.skill.skill_id in self._eval_owned_ids
-
-                conv_id = str(conv.get("convo_id", i))
-
-                eval_tracker.record(ConversationMetrics(
-                    conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if eval_hit else "pro",
-                    skill_found=eval_hit,
-                    used_pro_fallback=not eval_hit,
-                    resolution_time_ms=elapsed,
-                ))
-
-                global_tracker.record(ConversationMetrics(
-                    conversation_id=conv_id,
-                    resolved=resolved,
-                    model_used="flash" if raw_hit else "pro",
-                    skill_found=raw_hit,
-                    used_pro_fallback=not raw_hit,
-                    resolution_time_ms=elapsed,
-                ))
-
-            except Exception:
-                logger.exception("Post-learning error on conversation %d", i)
-                continue
-
-        logger.info("Post-learning complete: %d processed, %d skipped", len(eval_tracker._metrics), skipped)
-        return {"eval_scoped": eval_tracker, "global": global_tracker}
+        return results
 
     @staticmethod
-    def export_dual(trackers: dict[str, MetricsTracker], output_path: str):
-        """Export dual-view metrics to a single JSON file."""
-        data = {}
-        for scope, tracker in trackers.items():
-            data[scope] = {
-                "conversations": [asdict(m) for m in tracker._metrics],
-                "checkpoints": tracker._checkpoints,
-                "final": asdict(tracker.aggregate()),
-            }
+    def export_results(baseline: list[ConversationMetrics],
+                       continual: list[ConversationMetrics],
+                       skills_created: int,
+                       output_path: str):
+        b_scores = [r.judge_score for r in baseline]
+        c_scores = [r.judge_score for r in continual]
+
+        data = {
+            "baseline": [asdict(m) for m in baseline],
+            "continual": [asdict(m) for m in continual],
+            "skills_created": skills_created,
+            "summary": {
+                "baseline_avg_score": sum(b_scores) / len(b_scores) if b_scores else 0,
+                "continual_avg_score": sum(c_scores) / len(c_scores) if c_scores else 0,
+                "improvement": (sum(c_scores) / len(c_scores) - sum(b_scores) / len(b_scores)) if b_scores and c_scores else 0,
+                "baseline_count": len(baseline),
+                "continual_count": len(continual),
+            },
+        }
         with open(output_path, "w") as f:
             json.dump(data, f, indent=2)
-
-
-# ---------------------------------------------------------------------------
-# CLI entry point
-# ---------------------------------------------------------------------------
-
-async def _main():
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-
-    logger.info("Loading datasets...")
-    dev = load_dataset("dev")
-    train = load_dataset("train")
-    logger.info("Loaded %d dev, %d train conversations", len(dev), len(train))
-
-    harness = EvaluationHarness()
-    await harness.setup()
-    await harness.clear_eval_skills()
-
-    logger.info("=== Phase 1: Baseline ===")
-    baseline = await harness.run_baseline(dev)
-    EvaluationHarness.export_dual(baseline, "eval_baseline.json")
-
-    logger.info("=== Phase 2: Learning ===")
-    learning = await harness.run_learning(train)
-    EvaluationHarness.export_dual(learning, "eval_learning.json")
-
-    logger.info("=== Phase 3: Post-Learning ===")
-    post = await harness.run_post_learning(dev)
-    EvaluationHarness.export_dual(post, "eval_post_learning.json")
-
-    # Summary
-    b_eval = baseline["eval_scoped"].aggregate()
-    p_eval = post["eval_scoped"].aggregate()
-    logger.info("--- Eval-Scoped Results ---")
-    logger.info("Baseline hit rate: %.1f%%", b_eval.judge_hit_rate * 100)
-    logger.info("Post-learning hit rate: %.1f%%", p_eval.judge_hit_rate * 100)
-    logger.info("Improvement: +%.1f pp", (p_eval.judge_hit_rate - b_eval.judge_hit_rate) * 100)
-    logger.info("Skills created: %d", len(harness._eval_owned_ids))
-
-
-if __name__ == "__main__":
-    asyncio.run(_main())
