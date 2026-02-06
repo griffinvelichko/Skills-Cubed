@@ -13,6 +13,7 @@ dependencies = [
     "neo4j>=5.16",
     "google-generativeai",
     "python-dotenv",
+    "fastmcp",
 ]
 
 [project.optional-dependencies]

@@ -54,6 +54,23 @@ cp .env.example .env
 # Fill in NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, GEMINI_API_KEY
 ```
 
+### Run the MCP Server
+
+```bash
+python src/server/server.py
+```
+
+The server starts on port 8000 by default. Set the `PORT` environment variable to override.
+
+### Docker
+
+Build and run via Docker:
+
+```bash
+docker build -t skills-squared .
+docker run -p 8000:8000 skills-squared
+```
+
 ### Verify
 
 ```bash
