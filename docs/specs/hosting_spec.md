@@ -80,7 +80,7 @@ Set all environment variables in the Render dashboard under the service's "Envir
 | Variable | Description |
 |----------|-------------|
 | `NEO4J_URI` | Bolt URI, e.g. `neo4j+s://<id>.databases.neo4j.io` |
-| `NEO4J_USER` | Database username |
+| `NEO4J_USERNAME` | Database username (also accepts `NEO4J_USER` as fallback) |
 | `NEO4J_PASSWORD` | Database password |
 
 ### LLM (required for Create/Update tools)
@@ -161,7 +161,7 @@ Push to `josh-fastmcp`. Render auto-deploys on push.
 
 No code changes. In the Render dashboard:
 
-1. Add `NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD`.
+1. Add `NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`.
 2. Set `USE_MOCK_DB=false`.
 3. Save. Render redeploys automatically.
 
