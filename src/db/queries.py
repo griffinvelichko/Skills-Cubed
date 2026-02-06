@@ -1,8 +1,17 @@
+import re
 from datetime import datetime, timezone
 
 from src.db.connection import get_driver
 from src.skills.models import Skill, SkillUpdate
 from src.utils.config import validate_embedding
+
+# Lucene special characters that must be escaped for fulltext queries
+_LUCENE_SPECIAL = re.compile(r'([+\-&|!(){}[\]^"~*?:\\/@])')
+
+
+def _escape_lucene(text: str) -> str:
+    """Escape Lucene special characters so raw user text is safe for fulltext search."""
+    return _LUCENE_SPECIAL.sub(r'\\\1', text)
 
 
 async def get_skill(skill_id: str) -> Skill | None:
@@ -113,7 +122,7 @@ async def hybrid_search(
                 RETURN properties(node) AS props, score
                 LIMIT $fetch_count
                 """,
-                query_text=query_text.strip(),
+                query_text=_escape_lucene(query_text.strip()),
                 fetch_count=fetch_count,
             )
             kw_records = await kw_result.values()
