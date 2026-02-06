@@ -11,12 +11,12 @@ class SkillMatch(BaseModel):
     skill_id: str          # UUID (application-generated)
     title: str
     confidence: float      # Historical success rate [0, 1]
-    resolution_md: str
+    resolution_md: str     # Full .md playbook (Do/Check/Say steps)
     conditions: list[str]
 
 
 class SearchResponse(BaseModel):
-    skill: SkillMatch | None
+    skill: SkillMatch | None  # Best match, or None if no playbook fits
     query: str
     search_time_ms: float
 

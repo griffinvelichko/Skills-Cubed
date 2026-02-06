@@ -1,43 +1,65 @@
 import os
 
 from fastmcp import FastMCP
+from fastmcp.exceptions import ToolError
+
+from src.orchestration.search import search_skills_orchestration
+from src.orchestration.create import create_skill_orchestration
+from src.orchestration.update import update_skill_orchestration
 
 mcp = FastMCP("skills-cubed")
 
 
 @mcp.tool()
-def search_skills(query: str) -> list[dict]:
+async def search_skills(query: str) -> dict:
     """Query existing resolution patterns via hybrid search."""
-    return [
-        {
-            "skill_id": "SKL-001",
-            "title": "Password Reset Flow",
-            "confidence": 0.92,
-            "resolution_summary": "Guide user through Settings > Security > Reset Password. If locked out, verify identity via backup email.",
-        }
-    ]
+    if not query or not query.strip():
+        raise ToolError("query is required")
+    try:
+        response = await search_skills_orchestration(query.strip())
+        return response.model_dump()
+    except Exception as e:
+        raise ToolError(str(e)) from e
 
 
 @mcp.tool()
-def create_skill(conversation_id: str, resolution_summary: str) -> dict:
+async def create_skill(
+    conversation: str,
+    resolution_confirmed: bool = False,
+    metadata: dict | None = None,
+) -> dict:
     """Extract a new skill document from a successful resolution."""
-    return {
-        "skill_id": "SKL-002",
-        "status": "created",
-        "conversation_id": conversation_id,
-        "resolution_summary": resolution_summary,
-    }
+    if not conversation or not conversation.strip():
+        raise ToolError("conversation is required")
+    try:
+        response = await create_skill_orchestration(
+            conversation.strip(), resolution_confirmed, metadata or {}
+        )
+        return response.model_dump()
+    except Exception as e:
+        raise ToolError(str(e)) from e
 
 
 @mcp.tool()
-def update_skill(skill_id: str, conversation_id: str, refinement: str) -> dict:
+async def update_skill(
+    skill_id: str,
+    conversation: str,
+    feedback: str = "",
+) -> dict:
     """Refine an existing skill with new conversation data."""
-    return {
-        "skill_id": skill_id,
-        "status": "updated",
-        "conversation_id": conversation_id,
-        "refinement": refinement,
-    }
+    if not skill_id or not skill_id.strip():
+        raise ToolError("skill_id is required")
+    if not conversation or not conversation.strip():
+        raise ToolError("conversation is required")
+    try:
+        response = await update_skill_orchestration(
+            skill_id.strip(), conversation.strip(), feedback
+        )
+        return response.model_dump()
+    except ValueError as e:
+        raise ToolError(str(e)) from e
+    except Exception as e:
+        raise ToolError(str(e)) from e
 
 
 if __name__ == "__main__":

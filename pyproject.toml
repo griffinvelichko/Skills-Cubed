@@ -11,7 +11,7 @@ dependencies = [
     "uvicorn[standard]",
     "pydantic>=2.5",
     "neo4j>=5.16",
-    "google-generativeai",
+    "google-genai",
     "python-dotenv",
     "fastmcp",
 ]
