@@ -2,6 +2,101 @@
 
 A self-documenting customer service AI that learns from its own conversations. Built as an open-source MCP (Model Context Protocol) plugin, Skills-Squared enables any thinking model to continuously improve its support capabilities by extracting and reusing successful resolution patterns.
 
+## Quick Start — Connect Your Agent
+
+The MCP server is live at:
+
+```
+https://mcp-render-test.onrender.com/mcp
+```
+
+### Google ADK Agent
+
+```python
+from google.adk import Agent
+from google.adk.tools.mcp_tool import MCPToolset, StreamableHTTPConnectionParams
+
+skills_toolset = MCPToolset(
+    connection_params=StreamableHTTPConnectionParams(url="http://localhost:8080/mcp")
+)
+
+agent = Agent(
+    model="gemini-2.0-flash",
+    name="customer_success_agent",
+    instruction=SYSTEM_PROMPT,  # see below
+    tools=[skills_toolset],
+)
+```
+
+### Available Tools
+
+| Tool | Purpose | When to Call |
+|------|---------|-------------|
+| `search_skills(query)` | Find an existing resolution playbook | Start of every customer interaction |
+| `create_skill(conversation, metadata?)` | Extract a new playbook from a successful resolution | After resolving an issue from scratch |
+| `update_skill(skill_id, conversation, feedback?)` | Refine a playbook the agent deviated from | After resolving using a skill but changing the approach |
+
+### System Prompt for Continual Learning
+
+Add this to your agent's system prompt to enable the learning loop:
+
+```
+You have access to a skill library — executable playbooks extracted from previous
+successful resolutions. Using this library is your primary strategy.
+
+WORKFLOW FOR EVERY CUSTOMER INTERACTION:
+
+1. ALWAYS SEARCH FIRST — call search_skills with the customer's issue before doing
+   anything else. If a skill is returned, follow its Do/Check/Say steps. If not,
+   reason from scratch.
+
+2. AFTER A SUCCESSFUL RESOLUTION:
+   - No skill was used → call create_skill with the full conversation transcript
+   - Skill was used but you deviated → call update_skill with the skill_id,
+     conversation, and what you changed
+   - Skill was followed exactly → do nothing
+
+3. IF RESOLUTION FAILED — do not create or update. Escalate if needed.
+
+RULES:
+- Never show playbooks to the customer. The resolution_md is internal.
+- Trust confidence scores: >0.7 means follow closely, <0.4 means verify each step.
+- Pass metadata (product_area, issue_type) when creating skills.
+- Be specific in update feedback: "Added SSO check in step 2" not "Updated the skill."
+```
+
+### Continual Learning Loop
+
+```
+Customer asks question
+        |
+        v
+  search_skills(query)
+        |
+   +----+----+
+   |         |
+skill found  no skill
+   |         |
+   v         v
+Follow the   Reason from
+playbook     scratch
+   |         |
+   v         v
+Resolved?    Resolved?
+   |         |
+  yes        yes
+   |         |
+Deviated?    |
+   |         v
+  yes → update_skill(skill_id, conversation, feedback)
+   |
+  no → (do nothing, skill worked perfectly)
+   |
+   +→ create_skill(conversation, metadata)
+```
+
+---
+
 ## The MCP Server
 
 Skills-Squared implements a **FastAPI-based MCP server** that exposes three core tools:
