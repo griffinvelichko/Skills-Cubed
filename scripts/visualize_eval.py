@@ -20,13 +20,33 @@ import numpy as np
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "eval_output"
 
 
-def load_results() -> dict:
-    path = OUTPUT_DIR / "eval_results.json"
-    if not path.exists():
-        print(f"Missing {path} — run scripts/run_eval_slice.py first", file=sys.stderr)
+def load_results() -> tuple[dict, Path]:
+    final_path = OUTPUT_DIR / "eval_results.json"
+    partial_path = OUTPUT_DIR / "eval_results.partial.json"
+    if final_path.exists():
+        path = final_path
+    elif partial_path.exists():
+        path = partial_path
+        print(f"Using partial results: {partial_path}")
+    else:
+        print(f"Missing {final_path} (and no {partial_path}) — run scripts/run_eval_slice.py first", file=sys.stderr)
         sys.exit(1)
     with open(path) as f:
-        return json.load(f)
+        return json.load(f), path
+
+
+def compute_summary(data: dict) -> dict:
+    baseline_scores = [c["judge_score"] for c in data.get("baseline", [])]
+    continual_scores = [c["judge_score"] for c in data.get("continual", [])]
+    b_avg = sum(baseline_scores) / len(baseline_scores) if baseline_scores else 0.0
+    c_avg = sum(continual_scores) / len(continual_scores) if continual_scores else 0.0
+    return {
+        "baseline_count": len(baseline_scores),
+        "continual_count": len(continual_scores),
+        "baseline_avg_score": b_avg,
+        "continual_avg_score": c_avg,
+        "improvement": c_avg - b_avg if baseline_scores and continual_scores else 0.0,
+    }
 
 
 def running_average(scores: list[float]) -> list[float]:
@@ -189,9 +209,12 @@ def chart_score_distribution(data: dict):
 
 
 def main():
-    data = load_results()
+    data, path = load_results()
 
-    summary = data["summary"]
+    summary = data.get("summary") or compute_summary(data)
+    # Always recompute counts/averages from raw rows in case summary is stale.
+    summary = {**summary, **compute_summary(data)}
+    print(f"Loaded: {path}")
     print(f"Loaded results: {summary['baseline_count']} baseline, {summary['continual_count']} continual")
     print(f"  Baseline avg:  {summary['baseline_avg_score']:.2f}")
     print(f"  Continual avg: {summary['continual_avg_score']:.2f}")

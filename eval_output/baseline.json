@@ -1,0 +1,1596 @@
+{
+  "eval_scoped": {
+    "conversations": [
+      {
+        "conversation_id": "3532",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3633.3170300022175
+      },
+      {
+        "conversation_id": "9036",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2743.349249998573
+      },
+      {
+        "conversation_id": "7177",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3581.692629999452
+      },
+      {
+        "conversation_id": "3573",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1971.4833940015524
+      },
+      {
+        "conversation_id": "2062",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 11889.601854996727
+      },
+      {
+        "conversation_id": "7399",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2384.4296839997696
+      },
+      {
+        "conversation_id": "6899",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2088.0363739997847
+      },
+      {
+        "conversation_id": "2163",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1945.5248690028384
+      },
+      {
+        "conversation_id": "8250",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2043.6258269983227
+      },
+      {
+        "conversation_id": "5569",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2712.4846509977942
+      },
+      {
+        "conversation_id": "9072",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2920.357110000623
+      },
+      {
+        "conversation_id": "1454",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2168.5763530003896
+      },
+      {
+        "conversation_id": "1712",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2505.5256519990508
+      },
+      {
+        "conversation_id": "788",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1819.4072379992576
+      },
+      {
+        "conversation_id": "8395",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2419.809251998231
+      },
+      {
+        "conversation_id": "5071",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2622.0826440003293
+      },
+      {
+        "conversation_id": "8726",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5387.881378999737
+      },
+      {
+        "conversation_id": "6202",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2349.9709729985625
+      },
+      {
+        "conversation_id": "2159",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2398.802153998986
+      },
+      {
+        "conversation_id": "8105",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1927.7311109981383
+      },
+      {
+        "conversation_id": "1817",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2677.2457429979113
+      },
+      {
+        "conversation_id": "6474",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4462.727971000277
+      },
+      {
+        "conversation_id": "9262",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2244.9450849999266
+      },
+      {
+        "conversation_id": "3829",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1910.8370610010752
+      },
+      {
+        "conversation_id": "9278",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3392.0735539977613
+      },
+      {
+        "conversation_id": "1470",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3282.303205000062
+      },
+      {
+        "conversation_id": "9601",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 11768.068007000693
+      },
+      {
+        "conversation_id": "1439",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2558.2149420006317
+      },
+      {
+        "conversation_id": "10330",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2924.4278320002195
+      },
+      {
+        "conversation_id": "7199",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2211.030956998002
+      },
+      {
+        "conversation_id": "8641",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2018.2623350010545
+      },
+      {
+        "conversation_id": "1193",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1732.8118240002368
+      },
+      {
+        "conversation_id": "10031",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3366.2389929995697
+      },
+      {
+        "conversation_id": "10506",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4074.444512996706
+      },
+      {
+        "conversation_id": "8988",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2096.400384001754
+      },
+      {
+        "conversation_id": "8302",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3091.769888997078
+      },
+      {
+        "conversation_id": "9501",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3203.4690139989834
+      },
+      {
+        "conversation_id": "9007",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 6404.899560999183
+      },
+      {
+        "conversation_id": "8560",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2112.2860249997757
+      },
+      {
+        "conversation_id": "7302",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3510.4384980004397
+      },
+      {
+        "conversation_id": "2587",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 8449.068985999475
+      },
+      {
+        "conversation_id": "3252",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2884.1112949994567
+      },
+      {
+        "conversation_id": "2757",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2048.6368109995965
+      },
+      {
+        "conversation_id": "8321",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2418.502193002496
+      },
+      {
+        "conversation_id": "2057",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2211.2737099996593
+      },
+      {
+        "conversation_id": "7362",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3174.707425001543
+      },
+      {
+        "conversation_id": "6381",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2449.4766560019343
+      },
+      {
+        "conversation_id": "4727",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2198.6467399983667
+      },
+      {
+        "conversation_id": "5360",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3546.6379949975817
+      },
+      {
+        "conversation_id": "2678",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2005.2455570003076
+      },
+      {
+        "conversation_id": "10010",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2135.798512998008
+      },
+      {
+        "conversation_id": "5686",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5304.459582999698
+      },
+      {
+        "conversation_id": "3230",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3835.913946000801
+      },
+      {
+        "conversation_id": "8180",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2258.0111709976336
+      },
+      {
+        "conversation_id": "2072",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2828.267788998346
+      },
+      {
+        "conversation_id": "8634",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2597.7928819993394
+      },
+      {
+        "conversation_id": "8457",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2142.6414309971733
+      },
+      {
+        "conversation_id": "3853",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 12216.26694200313
+      },
+      {
+        "conversation_id": "4899",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2283.6685850015783
+      },
+      {
+        "conversation_id": "5329",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2292.2748009987117
+      },
+      {
+        "conversation_id": "4758",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1968.9285370004654
+      },
+      {
+        "conversation_id": "5997",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5129.9645340004645
+      },
+      {
+        "conversation_id": "8799",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 7730.86815699935
+      },
+      {
+        "conversation_id": "4442",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2830.0543349978398
+      },
+      {
+        "conversation_id": "161",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3817.7480199992715
+      },
+      {
+        "conversation_id": "4542",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2258.969000999059
+      },
+      {
+        "conversation_id": "6887",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2189.324065002438
+      },
+      {
+        "conversation_id": "8428",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4283.151628002088
+      },
+      {
+        "conversation_id": "4788",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2816.03621999966
+      },
+      {
+        "conversation_id": "3524",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4027.201122000406
+      },
+      {
+        "conversation_id": "3779",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5045.057326002279
+      },
+      {
+        "conversation_id": "9722",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2465.4043259979517
+      },
+      {
+        "conversation_id": "6766",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1890.6176250020508
+      },
+      {
+        "conversation_id": "4766",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2215.17096900061
+      },
+      {
+        "conversation_id": "1863",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2308.2502519973787
+      },
+      {
+        "conversation_id": "3700",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2373.718540999107
+      },
+      {
+        "conversation_id": "7949",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2593.621793999773
+      },
+      {
+        "conversation_id": "6765",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1796.366262002266
+      },
+      {
+        "conversation_id": "3883",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2595.9906130010495
+      },
+      {
+        "conversation_id": "5734",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2354.3753159974585
+      },
+      {
+        "conversation_id": "8653",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3053.730084000563
+      },
+      {
+        "conversation_id": "4879",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 6776.1735989988665
+      },
+      {
+        "conversation_id": "3233",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3630.4040249997342
+      },
+      {
+        "conversation_id": "1076",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2296.9015349990514
+      },
+      {
+        "conversation_id": "5131",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3612.8293449983175
+      },
+      {
+        "conversation_id": "2319",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4031.8309770009364
+      },
+      {
+        "conversation_id": "9443",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4359.365533000528
+      },
+      {
+        "conversation_id": "5537",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2200.769600996864
+      },
+      {
+        "conversation_id": "7707",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3122.871766998287
+      },
+      {
+        "conversation_id": "5552",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4368.510508000327
+      },
+      {
+        "conversation_id": "7655",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2297.676739999588
+      },
+      {
+        "conversation_id": "5534",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2275.5627059996186
+      },
+      {
+        "conversation_id": "9297",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2383.0432440008735
+      },
+      {
+        "conversation_id": "4762",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2652.071819000412
+      },
+      {
+        "conversation_id": "7205",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2673.2105880000745
+      },
+      {
+        "conversation_id": "2535",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2349.1011900005105
+      },
+      {
+        "conversation_id": "2899",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2637.2645820010803
+      },
+      {
+        "conversation_id": "316",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2156.3644659981946
+      }
+    ],
+    "checkpoints": [],
+    "final": {
+      "total_conversations": 98,
+      "resolution_rate": 0.7346938775510204,
+      "flash_ratio": 0.0,
+      "judge_hit_rate": 0.0,
+      "pro_fallback_rate": 1.0,
+      "avg_resolution_time_ms": 3259.2498855711356
+    }
+  },
+  "global": {
+    "conversations": [
+      {
+        "conversation_id": "3532",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3633.3170300022175
+      },
+      {
+        "conversation_id": "9036",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2743.349249998573
+      },
+      {
+        "conversation_id": "7177",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3581.692629999452
+      },
+      {
+        "conversation_id": "3573",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1971.4833940015524
+      },
+      {
+        "conversation_id": "2062",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 11889.601854996727
+      },
+      {
+        "conversation_id": "7399",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2384.4296839997696
+      },
+      {
+        "conversation_id": "6899",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2088.0363739997847
+      },
+      {
+        "conversation_id": "2163",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1945.5248690028384
+      },
+      {
+        "conversation_id": "8250",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2043.6258269983227
+      },
+      {
+        "conversation_id": "5569",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2712.4846509977942
+      },
+      {
+        "conversation_id": "9072",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2920.357110000623
+      },
+      {
+        "conversation_id": "1454",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2168.5763530003896
+      },
+      {
+        "conversation_id": "1712",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2505.5256519990508
+      },
+      {
+        "conversation_id": "788",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1819.4072379992576
+      },
+      {
+        "conversation_id": "8395",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2419.809251998231
+      },
+      {
+        "conversation_id": "5071",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2622.0826440003293
+      },
+      {
+        "conversation_id": "8726",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5387.881378999737
+      },
+      {
+        "conversation_id": "6202",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2349.9709729985625
+      },
+      {
+        "conversation_id": "2159",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2398.802153998986
+      },
+      {
+        "conversation_id": "8105",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1927.7311109981383
+      },
+      {
+        "conversation_id": "1817",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2677.2457429979113
+      },
+      {
+        "conversation_id": "6474",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4462.727971000277
+      },
+      {
+        "conversation_id": "9262",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2244.9450849999266
+      },
+      {
+        "conversation_id": "3829",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1910.8370610010752
+      },
+      {
+        "conversation_id": "9278",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3392.0735539977613
+      },
+      {
+        "conversation_id": "1470",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3282.303205000062
+      },
+      {
+        "conversation_id": "9601",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 11768.068007000693
+      },
+      {
+        "conversation_id": "1439",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2558.2149420006317
+      },
+      {
+        "conversation_id": "10330",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2924.4278320002195
+      },
+      {
+        "conversation_id": "7199",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2211.030956998002
+      },
+      {
+        "conversation_id": "8641",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2018.2623350010545
+      },
+      {
+        "conversation_id": "1193",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1732.8118240002368
+      },
+      {
+        "conversation_id": "10031",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3366.2389929995697
+      },
+      {
+        "conversation_id": "10506",
+        "resolved": true,
+        "model_used": "flash",
+        "skill_found": true,
+        "used_pro_fallback": false,
+        "resolution_time_ms": 4074.444512996706
+      },
+      {
+        "conversation_id": "8988",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2096.400384001754
+      },
+      {
+        "conversation_id": "8302",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3091.769888997078
+      },
+      {
+        "conversation_id": "9501",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3203.4690139989834
+      },
+      {
+        "conversation_id": "9007",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 6404.899560999183
+      },
+      {
+        "conversation_id": "8560",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2112.2860249997757
+      },
+      {
+        "conversation_id": "7302",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3510.4384980004397
+      },
+      {
+        "conversation_id": "2587",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 8449.068985999475
+      },
+      {
+        "conversation_id": "3252",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2884.1112949994567
+      },
+      {
+        "conversation_id": "2757",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2048.6368109995965
+      },
+      {
+        "conversation_id": "8321",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2418.502193002496
+      },
+      {
+        "conversation_id": "2057",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2211.2737099996593
+      },
+      {
+        "conversation_id": "7362",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3174.707425001543
+      },
+      {
+        "conversation_id": "6381",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2449.4766560019343
+      },
+      {
+        "conversation_id": "4727",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2198.6467399983667
+      },
+      {
+        "conversation_id": "5360",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3546.6379949975817
+      },
+      {
+        "conversation_id": "2678",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2005.2455570003076
+      },
+      {
+        "conversation_id": "10010",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2135.798512998008
+      },
+      {
+        "conversation_id": "5686",
+        "resolved": true,
+        "model_used": "flash",
+        "skill_found": true,
+        "used_pro_fallback": false,
+        "resolution_time_ms": 5304.459582999698
+      },
+      {
+        "conversation_id": "3230",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3835.913946000801
+      },
+      {
+        "conversation_id": "8180",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2258.0111709976336
+      },
+      {
+        "conversation_id": "2072",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2828.267788998346
+      },
+      {
+        "conversation_id": "8634",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2597.7928819993394
+      },
+      {
+        "conversation_id": "8457",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2142.6414309971733
+      },
+      {
+        "conversation_id": "3853",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 12216.26694200313
+      },
+      {
+        "conversation_id": "4899",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2283.6685850015783
+      },
+      {
+        "conversation_id": "5329",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2292.2748009987117
+      },
+      {
+        "conversation_id": "4758",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1968.9285370004654
+      },
+      {
+        "conversation_id": "5997",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5129.9645340004645
+      },
+      {
+        "conversation_id": "8799",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 7730.86815699935
+      },
+      {
+        "conversation_id": "4442",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2830.0543349978398
+      },
+      {
+        "conversation_id": "161",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3817.7480199992715
+      },
+      {
+        "conversation_id": "4542",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2258.969000999059
+      },
+      {
+        "conversation_id": "6887",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2189.324065002438
+      },
+      {
+        "conversation_id": "8428",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4283.151628002088
+      },
+      {
+        "conversation_id": "4788",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2816.03621999966
+      },
+      {
+        "conversation_id": "3524",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4027.201122000406
+      },
+      {
+        "conversation_id": "3779",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 5045.057326002279
+      },
+      {
+        "conversation_id": "9722",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2465.4043259979517
+      },
+      {
+        "conversation_id": "6766",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1890.6176250020508
+      },
+      {
+        "conversation_id": "4766",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2215.17096900061
+      },
+      {
+        "conversation_id": "1863",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2308.2502519973787
+      },
+      {
+        "conversation_id": "3700",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2373.718540999107
+      },
+      {
+        "conversation_id": "7949",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2593.621793999773
+      },
+      {
+        "conversation_id": "6765",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 1796.366262002266
+      },
+      {
+        "conversation_id": "3883",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2595.9906130010495
+      },
+      {
+        "conversation_id": "5734",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2354.3753159974585
+      },
+      {
+        "conversation_id": "8653",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3053.730084000563
+      },
+      {
+        "conversation_id": "4879",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 6776.1735989988665
+      },
+      {
+        "conversation_id": "3233",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3630.4040249997342
+      },
+      {
+        "conversation_id": "1076",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2296.9015349990514
+      },
+      {
+        "conversation_id": "5131",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3612.8293449983175
+      },
+      {
+        "conversation_id": "2319",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4031.8309770009364
+      },
+      {
+        "conversation_id": "9443",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4359.365533000528
+      },
+      {
+        "conversation_id": "5537",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2200.769600996864
+      },
+      {
+        "conversation_id": "7707",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 3122.871766998287
+      },
+      {
+        "conversation_id": "5552",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 4368.510508000327
+      },
+      {
+        "conversation_id": "7655",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2297.676739999588
+      },
+      {
+        "conversation_id": "5534",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2275.5627059996186
+      },
+      {
+        "conversation_id": "9297",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2383.0432440008735
+      },
+      {
+        "conversation_id": "4762",
+        "resolved": true,
+        "model_used": "flash",
+        "skill_found": true,
+        "used_pro_fallback": false,
+        "resolution_time_ms": 2652.071819000412
+      },
+      {
+        "conversation_id": "7205",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2673.2105880000745
+      },
+      {
+        "conversation_id": "2535",
+        "resolved": true,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2349.1011900005105
+      },
+      {
+        "conversation_id": "2899",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2637.2645820010803
+      },
+      {
+        "conversation_id": "316",
+        "resolved": false,
+        "model_used": "pro",
+        "skill_found": false,
+        "used_pro_fallback": true,
+        "resolution_time_ms": 2156.3644659981946
+      }
+    ],
+    "checkpoints": [],
+    "final": {
+      "total_conversations": 98,
+      "resolution_rate": 0.7346938775510204,
+      "flash_ratio": 0.030612244897959183,
+      "judge_hit_rate": 0.030612244897959183,
+      "pro_fallback_rate": 0.9693877551020408,
+      "avg_resolution_time_ms": 3259.2498855711356
+    }
+  }
+}

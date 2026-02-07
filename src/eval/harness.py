@@ -11,12 +11,14 @@ rising in continual as skills accumulate, vs flat baseline.
 
 import asyncio
 import gzip
+import inspect
 import json
 import logging
 import os
 import re
 import time
 import uuid
+from collections.abc import Awaitable, Callable
 from dataclasses import asdict
 from pathlib import Path
 
@@ -26,6 +28,7 @@ from src.eval.resolution import determine_resolution
 logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "abcd" / "data"
+ProgressHook = Callable[[str, int, list[ConversationMetrics]], Awaitable[None] | None]
 
 
 # ---------------------------------------------------------------------------
@@ -199,6 +202,19 @@ async def _increment_times_used(skill_id: str):
         await result.consume()
 
 
+async def _call_progress_hook(
+    progress_hook: ProgressHook | None,
+    phase: str,
+    index: int,
+    results: list[ConversationMetrics],
+):
+    if progress_hook is None:
+        return
+    maybe_awaitable = progress_hook(phase, index, results)
+    if inspect.isawaitable(maybe_awaitable):
+        await maybe_awaitable
+
+
 # ---------------------------------------------------------------------------
 # Evaluation Harness
 # ---------------------------------------------------------------------------
@@ -248,15 +264,37 @@ class EvaluationHarness:
             )
             await result.consume()
 
-    async def run_baseline(self, conversations: list[dict]) -> list[ConversationMetrics]:
+    async def load_eval_skill_ids(self) -> set[str]:
+        """Reload eval-owned skill IDs for the current run_id from DB."""
+        from src.db.connection import get_driver
+
+        driver = await get_driver()
+        async with driver.session() as session:
+            result = await session.run(
+                "MATCH (s:Skill) WHERE s.eval_run = $run_id RETURN s.skill_id AS skill_id",
+                run_id=self._run_id,
+            )
+            rows = await result.values("skill_id")
+        self._eval_skill_ids = set(rows)
+        logger.info("Loaded %d eval skills for run_id=%s", len(self._eval_skill_ids), self._run_id)
+        return self._eval_skill_ids
+
+    async def run_baseline(
+        self,
+        conversations: list[dict],
+        start_index: int = 0,
+        prior_results: list[ConversationMetrics] | None = None,
+        progress_hook: ProgressHook | None = None,
+    ) -> list[ConversationMetrics]:
         """Baseline: Flash resolves each conversation with NO skill access.
 
         Establishes the quality floor — what Flash can do on its own.
         """
-        results = []
+        results = list(prior_results or [])
         skipped = 0
 
-        for i, conv in enumerate(conversations):
+        for i in range(start_index, len(conversations)):
+            conv = conversations[i]
             try:
                 resolved = determine_resolution(conv, self.kb)
                 if resolved is None:
@@ -288,13 +326,21 @@ class EvaluationHarness:
             except Exception:
                 logger.exception("Baseline error on conversation %d", i)
                 continue
+            finally:
+                await _call_progress_hook(progress_hook, "baseline", i, results)
 
         logger.info("Baseline complete: %d scored, %d skipped, avg=%.2f",
                      len(results), skipped,
                      sum(r.judge_score for r in results) / len(results) if results else 0)
         return results
 
-    async def run_continual(self, conversations: list[dict]) -> list[ConversationMetrics]:
+    async def run_continual(
+        self,
+        conversations: list[dict],
+        start_index: int = 0,
+        prior_results: list[ConversationMetrics] | None = None,
+        progress_hook: ProgressHook | None = None,
+    ) -> list[ConversationMetrics]:
         """Continual learning: search → resolve → judge → create/update.
 
         Skills from conversation N are immediately available for N+1.
@@ -303,10 +349,11 @@ class EvaluationHarness:
         from src.orchestration.search import search_skills_orchestration
         from src.orchestration.update import update_skill_orchestration
 
-        results = []
+        results = list(prior_results or [])
         skipped = 0
 
-        for i, conv in enumerate(conversations):
+        for i in range(start_index, len(conversations)):
+            conv = conversations[i]
             try:
                 resolved = determine_resolution(conv, self.kb)
                 if resolved is None:
@@ -372,6 +419,8 @@ class EvaluationHarness:
             except Exception:
                 logger.exception("Continual error on conversation %d", i)
                 continue
+            finally:
+                await _call_progress_hook(progress_hook, "continual", i, results)
 
         logger.info(
             "Continual complete: %d scored, %d skipped, %d skills created, avg=%.2f",

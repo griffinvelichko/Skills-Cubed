@@ -1,0 +1,723 @@
+{
+  "meta": {
+    "size": 50,
+    "run_id": "recovered-from-log",
+    "run_prefix": "recovered:"
+  },
+  "progress": {
+    "baseline_last_index": 49,
+    "continual_last_index": 49
+  },
+  "baseline": [
+    {
+      "conversation_id": "0",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "1",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "2",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "3",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "4",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "5",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "6",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "7",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "8",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "9",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "10",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "11",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "12",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "13",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "14",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "15",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "16",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "17",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "18",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "19",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "20",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "21",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "22",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "23",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "24",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "25",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "26",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "27",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "28",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "29",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "30",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "31",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "32",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "33",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "34",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "35",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "36",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "37",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "38",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "39",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "40",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "41",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "42",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "43",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "44",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "45",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "46",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "47",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "48",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "49",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    }
+  ],
+  "continual": [
+    {
+      "conversation_id": "0",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "1",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "2",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "3",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "4",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "5",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "6",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "7",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "8",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "9",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "4b7f4811-4d47-4c22-8ebe-075442adad22",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "10",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "11",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "12",
+      "judge_score": 4.0,
+      "skill_used": true,
+      "skill_id": "4b7f4811-4d47-4c22-8ebe-075442adad22",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "13",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "14",
+      "judge_score": 5.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "15",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "16",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "5630443d-f0b3-4fc4-a5fe-163610a61d88",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "17",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "18",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "19",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "20",
+      "judge_score": 3.0,
+      "skill_used": true,
+      "skill_id": "84bba5bd-8863-415d-993b-46e19bede092",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "21",
+      "judge_score": 4.0,
+      "skill_used": true,
+      "skill_id": "84bba5bd-8863-415d-993b-46e19bede092",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "22",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "84bba5bd-8863-415d-993b-46e19bede092",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "23",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "a0ad955a-195f-4994-b744-cb7f483f8d30",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "24",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "25",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "d8e0c29d-1716-4d6d-972c-ad1f1c6e578a",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "26",
+      "judge_score": 3.0,
+      "skill_used": true,
+      "skill_id": "8e1b1e3d-3015-48dd-89cd-e6d0e34800be",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "27",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "28",
+      "judge_score": 4.0,
+      "skill_used": true,
+      "skill_id": "5630443d-f0b3-4fc4-a5fe-163610a61d88",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "29",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "30",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "31",
+      "judge_score": 4.0,
+      "skill_used": true,
+      "skill_id": "badd132f-5658-4746-b69e-52a401461e6e",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "32",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "33",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "34",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "5630443d-f0b3-4fc4-a5fe-163610a61d88",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "35",
+      "judge_score": 1.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "36",
+      "judge_score": 4.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "37",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "2218fce2-851c-4354-b474-fe9799f45895",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "38",
+      "judge_score": 3.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "39",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "2218fce2-851c-4354-b474-fe9799f45895",
+      "resolution_time_ms": 0.0
+    },
+    {
+      "conversation_id": "6865",
+      "judge_score": 2.0,
+      "skill_used": true,
+      "skill_id": "924e6bc8-8ef8-4044-a6a2-00cad65ad9b8",
+      "resolution_time_ms": 16675.964303998626
+    },
+    {
+      "conversation_id": "6650",
+      "judge_score": 2.0,
+      "skill_used": true,
+      "skill_id": "8e1b1e3d-3015-48dd-89cd-e6d0e34800be",
+      "resolution_time_ms": 14213.069692996214
+    },
+    {
+      "conversation_id": "1227",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "d8e0c29d-1716-4d6d-972c-ad1f1c6e578a",
+      "resolution_time_ms": 15981.40864600282
+    },
+    {
+      "conversation_id": "7468",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "21284073-7d08-489d-97eb-921431e944bf",
+      "resolution_time_ms": 340513.38810599555
+    },
+    {
+      "conversation_id": "5210",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "21284073-7d08-489d-97eb-921431e944bf",
+      "resolution_time_ms": 26299.83104299754
+    },
+    {
+      "conversation_id": "1733",
+      "judge_score": 3.0,
+      "skill_used": true,
+      "skill_id": "84bba5bd-8863-415d-993b-46e19bede092",
+      "resolution_time_ms": 22181.5591400009
+    },
+    {
+      "conversation_id": "7275",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "5630443d-f0b3-4fc4-a5fe-163610a61d88",
+      "resolution_time_ms": 21535.225152998464
+    },
+    {
+      "conversation_id": "6188",
+      "judge_score": 2.0,
+      "skill_used": false,
+      "skill_id": null,
+      "resolution_time_ms": 45495.086310998886
+    },
+    {
+      "conversation_id": "7225",
+      "judge_score": 3.0,
+      "skill_used": true,
+      "skill_id": "84bba5bd-8863-415d-993b-46e19bede092",
+      "resolution_time_ms": 20955.124498002988
+    },
+    {
+      "conversation_id": "9916",
+      "judge_score": 5.0,
+      "skill_used": true,
+      "skill_id": "2218fce2-851c-4354-b474-fe9799f45895",
+      "resolution_time_ms": 20942.332847000216
+    }
+  ],
+  "skills_created": 1,
+  "summary": {
+    "baseline_avg_score": 3.18,
+    "continual_avg_score": 3.5,
+    "improvement": 0.31999999999999984,
+    "baseline_count": 50,
+    "continual_count": 50
+  }
+}

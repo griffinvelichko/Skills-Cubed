@@ -1,0 +1,740 @@
+2026-02-06 15:45:34,497 INFO __main__: Loading dataset...
+2026-02-06 15:45:37,814 INFO __main__: Using 50 conversations for both baseline and continual
+2026-02-06 15:45:42,887 INFO neo4j.notifications: Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description='note: successful completion - index or constraint already exists. The command \'CREATE VECTOR INDEX skill_embedding IF NOT EXISTS FOR (e:Skill) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 768, `vector.similarity_function`: "cosine"}}\' has no effect. The index or constraint specified by \'VECTOR INDEX skill_embedding FOR (e:Skill) ON (e.embedding)\' already exists.', position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "\n            CREATE VECTOR INDEX skill_embedding IF NOT EXISTS\n            FOR (s:Skill)\n            ON (s.embedding)\n            OPTIONS {indexConfig: {\n                `vector.dimensions`: 768,\n                `vector.similarity_function`: 'cosine'\n            }}\n            "
+2026-02-06 15:45:43,083 INFO src.eval.harness: Cleared 25 eval-tagged skill nodes (prefix=torrin:)
+2026-02-06 15:45:43,126 INFO src.eval.harness: Cleared 0 legacy eval skill nodes
+2026-02-06 15:45:43,126 INFO __main__: === Phase 1: Baseline (50 conversations, no skills) ===
+2026-02-06 15:45:55,429 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:00,132 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:00,141 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:09,843 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:09,848 INFO src.eval.harness: Baseline [0]: score=2.0 time=24304ms
+2026-02-06 15:46:09,849 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:15,780 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:15,786 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:20,560 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:20,562 INFO src.eval.harness: Baseline [1]: score=2.0 time=10713ms
+2026-02-06 15:46:20,562 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:28,993 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:29,000 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:37,094 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:37,099 INFO src.eval.harness: Baseline [2]: score=2.0 time=16537ms
+2026-02-06 15:46:37,100 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:49,318 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:49,321 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:54,095 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:46:54,098 INFO src.eval.harness: Baseline [3]: score=4.0 time=14596ms
+2026-02-06 15:46:54,098 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:46:54,670 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:46:54,676 WARNING src.eval.harness: Transient error (baseline-resolve:4), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 15:46:56,679 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:01,791 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:01,800 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:05,476 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:05,478 INFO src.eval.harness: Baseline [4]: score=2.0 time=11381ms
+2026-02-06 15:47:05,479 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:10,847 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:10,851 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:20,182 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:20,186 INFO src.eval.harness: Baseline [5]: score=2.0 time=12444ms
+2026-02-06 15:47:20,186 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:31,792 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:31,798 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:37,368 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:37,373 INFO src.eval.harness: Baseline [6]: score=5.0 time=17187ms
+2026-02-06 15:47:37,373 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:44,121 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:44,124 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:49,482 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:47:49,484 INFO src.eval.harness: Baseline [7]: score=5.0 time=12111ms
+2026-02-06 15:47:49,484 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:47:59,947 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:47:59,949 WARNING src.eval.harness: Transient error (baseline-resolve:8), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 15:48:01,951 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:09,607 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:09,609 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:20,223 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:20,227 INFO src.eval.harness: Baseline [8]: score=3.0 time=28281ms
+2026-02-06 15:48:20,228 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:27,183 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:27,223 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:33,854 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:33,858 INFO src.eval.harness: Baseline [9]: score=5.0 time=11219ms
+2026-02-06 15:48:33,859 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:40,675 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:40,678 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:52,067 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:52,071 INFO src.eval.harness: Baseline [10]: score=2.0 time=18212ms
+2026-02-06 15:48:52,071 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:48:59,016 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:48:59,020 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:11,869 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:11,873 INFO src.eval.harness: Baseline [11]: score=5.0 time=17406ms
+2026-02-06 15:49:11,874 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:20,876 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:20,879 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:30,459 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:30,463 INFO src.eval.harness: Baseline [12]: score=2.0 time=18589ms
+2026-02-06 15:49:30,464 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:41,166 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:41,177 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:45,774 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:45,777 INFO src.eval.harness: Baseline [13]: score=5.0 time=12887ms
+2026-02-06 15:49:45,777 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:52,252 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:52,256 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:49:55,815 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:49:55,817 INFO src.eval.harness: Baseline [14]: score=5.0 time=10040ms
+2026-02-06 15:49:55,817 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:02,289 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:02,291 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:14,163 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:14,167 INFO src.eval.harness: Baseline [15]: score=4.0 time=16004ms
+2026-02-06 15:50:14,168 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:18,404 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:50:18,405 WARNING src.eval.harness: Transient error (baseline-resolve:16), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 15:50:20,407 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:30,180 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:30,192 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:42,190 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:42,194 INFO src.eval.harness: Baseline [16]: score=2.0 time=28026ms
+2026-02-06 15:50:42,195 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:54,767 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:54,772 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:50:59,129 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:50:59,135 INFO src.eval.harness: Baseline [17]: score=1.0 time=14558ms
+2026-02-06 15:50:59,135 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:01,679 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:51:01,681 WARNING src.eval.harness: Transient error (baseline-resolve:18), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 15:51:03,683 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:17,151 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:17,155 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:26,831 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:26,835 INFO src.eval.harness: Baseline [18]: score=3.0 time=25863ms
+2026-02-06 15:51:26,836 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:31,436 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:31,440 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:39,302 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:39,306 INFO src.eval.harness: Baseline [19]: score=2.0 time=12471ms
+2026-02-06 15:51:39,306 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:45,246 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:45,250 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:51:56,526 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:51:56,530 INFO src.eval.harness: Baseline [20]: score=4.0 time=15268ms
+2026-02-06 15:51:56,531 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:01,463 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:01,468 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:07,821 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:07,824 INFO src.eval.harness: Baseline [21]: score=4.0 time=11294ms
+2026-02-06 15:52:07,825 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:13,033 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:13,037 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:22,636 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:22,640 INFO src.eval.harness: Baseline [22]: score=4.0 time=14815ms
+2026-02-06 15:52:22,641 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:31,956 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:31,960 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:40,523 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:40,529 INFO src.eval.harness: Baseline [23]: score=5.0 time=15877ms
+2026-02-06 15:52:40,530 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:51,741 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:52:51,744 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:52:53,214 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:52:53,216 WARNING src.eval.harness: Transient error (baseline-judge:24), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA      
+2026-02-06 15:52:55,219 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:09,019 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:09,023 INFO src.eval.harness: Baseline [24]: score=2.0 time=26444ms
+2026-02-06 15:53:09,024 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:18,721 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:18,725 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:24,804 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:24,808 INFO src.eval.harness: Baseline [25]: score=2.0 time=15784ms
+2026-02-06 15:53:24,808 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:31,221 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:31,225 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:52,267 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:52,271 INFO src.eval.harness: Baseline [26]: score=4.0 time=25391ms
+2026-02-06 15:53:52,271 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:53:59,111 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:53:59,115 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:07,894 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:07,899 INFO src.eval.harness: Baseline [27]: score=1.0 time=15627ms
+2026-02-06 15:54:07,900 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:16,796 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:16,800 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:22,309 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:22,313 INFO src.eval.harness: Baseline [28]: score=5.0 time=12321ms
+2026-02-06 15:54:22,314 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:29,207 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:29,221 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:34,721 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:34,724 INFO src.eval.harness: Baseline [29]: score=1.0 time=12411ms
+2026-02-06 15:54:34,725 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:42,008 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:42,010 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:49,708 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:49,712 INFO src.eval.harness: Baseline [30]: score=2.0 time=12876ms
+2026-02-06 15:54:49,712 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:54:56,903 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:54:56,907 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:03,349 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:03,357 INFO src.eval.harness: Baseline [31]: score=5.0 time=13645ms
+2026-02-06 15:55:03,358 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:09,612 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:09,616 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:13,255 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:13,258 INFO src.eval.harness: Baseline [32]: score=1.0 time=9901ms
+2026-02-06 15:55:13,259 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:21,608 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:21,614 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:27,333 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:27,344 INFO src.eval.harness: Baseline [33]: score=5.0 time=11967ms
+2026-02-06 15:55:27,344 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:34,057 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:34,060 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:41,261 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:41,265 INFO src.eval.harness: Baseline [34]: score=4.0 time=13921ms
+2026-02-06 15:55:41,266 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:44,731 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 15:55:44,738 WARNING src.eval.harness: Transient error (baseline-resolve:35), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 15:55:46,740 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:55:54,365 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:55:54,368 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:01,500 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:01,503 INFO src.eval.harness: Baseline [35]: score=2.0 time=18110ms
+2026-02-06 15:56:01,504 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:07,818 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:07,822 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:19,031 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:19,063 INFO src.eval.harness: Baseline [36]: score=4.0 time=17559ms
+2026-02-06 15:56:19,064 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:24,876 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:24,878 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:37,298 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:37,303 INFO src.eval.harness: Baseline [37]: score=3.0 time=16095ms
+2026-02-06 15:56:37,304 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:43,700 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:43,702 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:48,065 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:48,070 INFO src.eval.harness: Baseline [38]: score=2.0 time=10766ms
+2026-02-06 15:56:48,070 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:56:53,528 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:56:53,533 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:13,821 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:13,825 INFO src.eval.harness: Baseline [39]: score=3.0 time=23609ms
+2026-02-06 15:57:13,826 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:21,262 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:21,268 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:31,113 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:31,118 INFO src.eval.harness: Baseline [40]: score=2.0 time=17293ms
+2026-02-06 15:57:31,119 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:39,981 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:39,986 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:46,706 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:46,710 INFO src.eval.harness: Baseline [41]: score=5.0 time=13436ms
+2026-02-06 15:57:46,710 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:57:52,006 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:57:52,011 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:00,978 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:00,981 INFO src.eval.harness: Baseline [42]: score=5.0 time=14271ms
+2026-02-06 15:58:00,982 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:08,484 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:08,492 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:16,017 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:16,021 INFO src.eval.harness: Baseline [43]: score=5.0 time=12881ms
+2026-02-06 15:58:16,021 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:24,320 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:24,324 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:30,871 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:30,877 INFO src.eval.harness: Baseline [44]: score=4.0 time=14856ms
+2026-02-06 15:58:30,878 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:36,846 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:36,850 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:46,437 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:46,439 INFO src.eval.harness: Baseline [45]: score=2.0 time=13445ms
+2026-02-06 15:58:46,440 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:58:54,198 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:58:54,203 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:08,852 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:08,856 INFO src.eval.harness: Baseline [46]: score=2.0 time=22417ms
+2026-02-06 15:59:08,857 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:15,389 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:15,392 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:27,024 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:27,029 INFO src.eval.harness: Baseline [47]: score=3.0 time=15697ms
+2026-02-06 15:59:27,029 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:32,836 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:32,840 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:43,275 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:43,277 INFO src.eval.harness: Baseline [48]: score=3.0 time=16248ms
+2026-02-06 15:59:43,278 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 15:59:50,928 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 15:59:50,929 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:01,375 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:01,378 INFO src.eval.harness: Baseline [49]: score=2.0 time=15333ms
+2026-02-06 16:00:01,379 INFO src.eval.harness: Baseline complete: 50 scored, 0 skipped, avg=3.18
+2026-02-06 16:00:01,379 INFO __main__: === Phase 2: Continual Learning (50 conversations) ===
+2026-02-06 16:00:01,692 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:00:01,888 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:04,019 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:04,024 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:09,856 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:09,861 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:21,522 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:21,524 INFO src.eval.harness: Continual [0]: score=3.0 skill=none skills_total=0 time=19993ms
+2026-02-06 16:00:21,674 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:00:22,076 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:23,936 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:23,938 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:27,287 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:00:27,288 WARNING src.eval.harness: Transient error (continual-resolve:1), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 16:00:31,587 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:37,875 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:37,879 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:43,372 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:43,378 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:52,950 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:53,121 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:00:53,766 INFO src.eval.harness: Continual [1]: score=2.0 skill=none skills_total=1 time=19557ms
+2026-02-06 16:00:53,926 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:00:54,026 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:00:56,056 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:00:56,060 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:06,683 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:06,685 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:15,557 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:15,578 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:26,345 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:26,519 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:01:27,090 INFO src.eval.harness: Continual [2]: score=2.0 skill=none skills_total=2 time=18924ms
+2026-02-06 16:01:27,238 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:01:27,375 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:33,524 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:33,529 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:44,536 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:44,539 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:01:54,669 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:01:54,675 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:04,517 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:04,654 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:02:05,261 INFO src.eval.harness: Continual [3]: score=3.0 skill=none skills_total=3 time=24822ms
+2026-02-06 16:02:05,408 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:02:05,544 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:08,701 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:08,704 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:18,097 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:18,099 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:22,251 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:22,259 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:31,357 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:31,520 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:02:32,118 INFO src.eval.harness: Continual [4]: score=2.0 skill=none skills_total=4 time=14229ms
+2026-02-06 16:02:32,264 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:02:32,446 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:35,562 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:35,563 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:42,530 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:42,532 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:02:50,999 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:02:51,004 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:03,077 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:03,240 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:03:03,700 INFO src.eval.harness: Continual [5]: score=2.0 skill=none skills_total=5 time=16094ms
+2026-02-06 16:03:03,837 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:03:04,051 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:11,881 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:11,885 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:18,507 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:18,511 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:30,154 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:30,158 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:39,352 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:39,514 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:03:40,007 INFO src.eval.harness: Continual [6]: score=4.0 skill=none skills_total=6 time=23646ms
+2026-02-06 16:03:40,167 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:03:40,314 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:43,294 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:43,299 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:49,319 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:49,324 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:03:54,068 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:03:54,073 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:01,665 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:04:01,667 WARNING src.eval.harness: Transient error (create:7), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA
+2026-02-06 16:04:03,669 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:12,522 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:04:12,670 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:04:13,185 INFO src.eval.harness: Continual [7]: score=5.0 skill=none skills_total=7 time=14065ms
+2026-02-06 16:04:13,334 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:04:13,485 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:17,203 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:04:17,207 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:23,562 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:04:23,568 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:39,271 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:04:39,275 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:04:48,110 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:04:48,112 WARNING src.eval.harness: Transient error (create:8), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA
+2026-02-06 16:04:50,114 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:01,621 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:01,784 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:05:02,330 INFO src.eval.harness: Continual [8]: score=4.0 skill=none skills_total=8 time=23162ms
+2026-02-06 16:05:02,482 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:05:02,616 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:07,737 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:07,799 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:15,741 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:15,744 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:22,276 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:22,694 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:36,245 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:36,429 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:05:37,046 INFO src.eval.harness: Continual [9]: score=5.0 skill=4b7f4811-4d47-4c22-8ebe-075442adad22 skills_total=8 time=16946ms
+2026-02-06 16:05:37,229 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:05:37,405 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:39,939 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:39,941 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:48,519 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:48,524 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:05:55,015 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:05:55,017 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:07,265 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:07,409 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:06:07,939 INFO src.eval.harness: Continual [10]: score=2.0 skill=none skills_total=9 time=14849ms
+2026-02-06 16:06:08,080 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:06:08,228 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:11,786 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:11,790 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:21,944 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:21,950 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:26,389 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:26,394 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:34,602 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:34,755 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:06:35,314 INFO src.eval.harness: Continual [11]: score=5.0 skill=none skills_total=10 time=16027ms
+2026-02-06 16:06:35,446 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:06:35,596 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:39,642 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:39,713 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:45,379 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:06:45,384 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:06:46,638 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:06:46,641 WARNING src.eval.harness: Transient error (continual-judge:12), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:06:48,643 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:01,056 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:01,061 INFO src.eval.harness: Continual [12]: score=4.0 skill=4b7f4811-4d47-4c22-8ebe-075442adad22 skills_total=10 time=22555ms
+2026-02-06 16:07:01,217 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:07:01,760 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:06,966 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:06,971 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:14,168 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:14,173 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:17,654 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:17,657 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:28,223 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:28,353 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:07:28,792 INFO src.eval.harness: Continual [13]: score=5.0 skill=none skills_total=11 time=16595ms
+2026-02-06 16:07:30,991 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:07:31,118 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:34,352 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:34,354 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:40,309 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:40,311 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:43,910 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:43,913 INFO src.eval.harness: Continual [14]: score=5.0 skill=none skills_total=11 time=13054ms
+2026-02-06 16:07:44,045 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:07:44,613 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:47,756 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:07:47,759 WARNING src.eval.harness: Transient error (continual-search:15), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 16:07:49,883 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:07:50,076 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:07:56,574 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:07:56,582 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:02,527 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:02,530 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:15,221 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:15,226 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:25,025 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:25,183 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:08:25,810 INFO src.eval.harness: Continual [15]: score=4.0 skill=none skills_total=12 time=28095ms   
+2026-02-06 16:08:25,945 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:08:26,109 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:29,982 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:30,020 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:36,970 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:36,974 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:42,449 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:08:42,451 WARNING src.eval.harness: Transient error (continual-judge:16), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA
+2026-02-06 16:08:44,452 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:08:49,777 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:08:50,175 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:01,582 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:01,715 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:09:02,124 INFO src.eval.harness: Continual [16]: score=5.0 skill=5630443d-f0b3-4fc4-a5fe-163610a61d88 skills_total=12 time=21583ms
+2026-02-06 16:09:02,254 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:09:02,405 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:06,160 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:06,164 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:17,092 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:17,096 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:20,530 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:20,536 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:30,520 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:30,666 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:09:31,146 INFO src.eval.harness: Continual [17]: score=1.0 skill=none skills_total=13 time=15268ms
+2026-02-06 16:09:31,277 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:09:31,431 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:35,500 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:35,503 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:42,109 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:42,113 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:51,884 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:09:51,888 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:53,991 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:09:53,995 WARNING src.eval.harness: Transient error (create:18), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA
+2026-02-06 16:09:55,998 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:09:58,754 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:09:58,756 WARNING src.eval.harness: Transient error (create:18), retry 2/4 in 4s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA
+2026-02-06 16:10:02,760 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:11,410 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:11,549 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:10:11,980 INFO src.eval.harness: Continual [18]: score=3.0 skill=none skills_total=14 time=17769ms
+2026-02-06 16:10:12,127 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:10:12,272 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:17,880 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:17,881 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:22,531 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:22,536 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:32,379 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:32,385 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:46,561 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:46,698 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:10:47,172 INFO src.eval.harness: Continual [19]: score=2.0 skill=none skills_total=15 time=17344ms
+2026-02-06 16:10:47,309 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:10:47,452 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:51,790 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:51,830 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:10:57,263 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:10:57,267 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:06,739 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:07,160 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:19,549 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:19,691 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:11:20,093 INFO src.eval.harness: Continual [20]: score=3.0 skill=84bba5bd-8863-415d-993b-46e19bede092 skills_total=15 time=16432ms
+2026-02-06 16:11:20,230 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:11:20,374 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:25,951 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:25,984 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:32,665 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:32,669 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:45,726 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:46,184 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:11:58,984 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:11:59,169 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:11:59,635 INFO src.eval.harness: Continual [21]: score=4.0 skill=84bba5bd-8863-415d-993b-46e19bede092 skills_total=15 time=22599ms
+2026-02-06 16:11:59,792 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:11:59,970 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:05,015 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:12:05,050 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:09,820 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:12:09,824 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:14,131 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:12:14,133 WARNING src.eval.harness: Transient error (continual-judge:22), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:12:16,135 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:22,283 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:12:22,643 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:44,278 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:12:44,476 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:12:44,934 INFO src.eval.harness: Continual [22]: score=5.0 skill=84bba5bd-8863-415d-993b-46e19bede092 skills_total=15 time=19488ms
+2026-02-06 16:12:45,072 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:12:45,244 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:51,586 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:12:51,587 WARNING src.eval.harness: Transient error (continual-search:23), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA    
+2026-02-06 16:12:53,745 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:12:53,978 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:12:58,358 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:12:58,746 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:13:04,645 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:13:04,651 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:13:13,099 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:13:13,514 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:13:30,006 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:13:30,181 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:13:34,383 INFO src.eval.harness: Continual [23]: score=5.0 skill=a0ad955a-195f-4994-b744-cb7f483f8d30 skills_total=15 time=25118ms
+2026-02-06 16:13:37,617 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:13:38,213 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:13:41,211 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:13:41,214 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:13:46,536 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:13:46,542 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:01,541 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:01,543 INFO src.eval.harness: Continual [24]: score=4.0 skill=none skills_total=15 time=25169ms   
+2026-02-06 16:14:01,987 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:14:14,901 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:27,057 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:27,552 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:34,434 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:34,438 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:39,502 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:39,993 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:51,124 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:51,292 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:14:51,830 INFO src.eval.harness: Continual [25]: score=5.0 skill=d8e0c29d-1716-4d6d-972c-ad1f1c6e578a skills_total=15 time=36526ms
+2026-02-06 16:14:51,997 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:14:52,175 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:14:56,889 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:14:56,926 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:03,406 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:15:03,417 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:08,574 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:15:08,581 WARNING src.eval.harness: Transient error (continual-judge:26), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:15:10,584 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:12,421 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:15:12,424 WARNING src.eval.harness: Transient error (continual-judge:26), retry 2/4 in 4s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:15:16,429 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:19,070 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:15:19,074 WARNING src.eval.harness: Transient error (continual-judge:26), retry 3/4 in 8s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:15:27,082 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:37,021 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:15:37,405 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:15:53,633 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:15:53,796 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:15:54,230 INFO src.eval.harness: Continual [26]: score=3.0 skill=8e1b1e3d-3015-48dd-89cd-e6d0e34800be skills_total=15 time=42701ms
+2026-02-06 16:15:54,372 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:15:54,546 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:02,969 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:02,976 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:08,621 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:08,653 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:20,880 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:20,895 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:32,074 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:32,238 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:16:32,738 INFO src.eval.harness: Continual [27]: score=2.0 skill=none skills_total=16 time=24205ms
+2026-02-06 16:16:32,922 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:16:33,144 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:42,722 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:43,199 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:50,635 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:50,657 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:16:58,122 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:16:58,125 INFO src.eval.harness: Continual [28]: score=4.0 skill=5630443d-f0b3-4fc4-a5fe-163610a61d88 skills_total=16 time=22873ms
+2026-02-06 16:16:58,277 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:16:58,795 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:02,919 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:02,922 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:09,356 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:09,360 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:14,016 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:14,020 INFO src.eval.harness: Continual [29]: score=2.0 skill=none skills_total=16 time=15895ms
+2026-02-06 16:17:14,171 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:17:14,790 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:19,924 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:19,929 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:28,391 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:28,395 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:34,444 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:34,446 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:46,810 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:46,961 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:17:47,438 INFO src.eval.harness: Continual [30]: score=1.0 skill=none skills_total=17 time=17942ms
+2026-02-06 16:17:47,590 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:17:47,875 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:52,322 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:52,369 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:17:56,400 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:17:56,404 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:03,844 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:03,849 INFO src.eval.harness: Continual [31]: score=4.0 skill=badd132f-5658-4746-b69e-52a401461e6e skills_total=17 time=13884ms
+2026-02-06 16:18:04,011 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:18:04,605 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:07,965 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:07,969 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:13,409 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:13,412 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:17,694 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:17,698 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:27,248 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:27,387 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:18:27,948 INFO src.eval.harness: Continual [32]: score=1.0 skill=none skills_total=18 time=13849ms
+2026-02-06 16:18:28,120 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:18:28,281 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:30,987 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:30,992 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:40,435 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:40,439 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:46,374 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:46,380 INFO src.eval.harness: Continual [33]: score=4.0 skill=none skills_total=18 time=15960ms   
+2026-02-06 16:18:46,527 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:18:47,135 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:52,016 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:52,076 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:18:56,364 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:18:56,369 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:04,658 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:04,993 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:21,744 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:21,902 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:19:22,630 INFO src.eval.harness: Continual [34]: score=5.0 skill=5630443d-f0b3-4fc4-a5fe-163610a61d88 skills_total=18 time=18283ms
+2026-02-06 16:19:22,771 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:19:23,061 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:34,479 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:34,484 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:39,677 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:39,682 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:48,109 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:48,113 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:19:58,426 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:19:58,586 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:19:59,061 INFO src.eval.harness: Continual [35]: score=1.0 skill=none skills_total=19 time=22933ms   
+2026-02-06 16:19:59,206 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:19:59,368 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:11,560 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:20:11,565 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:21,603 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:20:21,739 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:28,331 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:20:28,333 INFO src.eval.harness: Continual [36]: score=4.0 skill=none skills_total=19 time=26688ms
+2026-02-06 16:20:28,473 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:20:29,050 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:34,185 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:20:34,220 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:50,712 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:20:50,734 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:20:55,009 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:20:55,012 WARNING src.eval.harness: Transient error (continual-judge:37), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA     
+2026-02-06 16:20:57,018 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:21:02,037 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:21:03,762 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:21:15,297 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:21:15,615 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:21:17,562 INFO src.eval.harness: Continual [37]: score=5.0 skill=2218fce2-851c-4354-b474-fe9799f45895 skills_total=19 time=31139ms
+2026-02-06 16:21:17,750 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:21:18,073 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:21:22,494 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:21:22,499 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:02,601 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:22:02,603 WARNING src.eval.harness: Transient error (continual-resolve:38), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA   
+2026-02-06 16:22:04,606 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:09,787 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:09,808 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:17,786 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:17,789 INFO src.eval.harness: Continual [38]: score=3.0 skill=none skills_total=19 time=57532ms
+2026-02-06 16:22:18,097 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:22:18,994 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:25,602 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:25,663 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:32,117 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:32,133 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:40,545 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:42,726 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:22:56,780 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:22:57,064 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:22:57,462 INFO src.eval.harness: Continual [39]: score=5.0 skill=2218fce2-851c-4354-b474-fe9799f45895 skills_total=19 time=21519ms
+2026-02-06 16:22:57,900 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+2026-02-06 16:22:58,362 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:23:02,664 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 200 OK"
+2026-02-06 16:23:02,713 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2026-02-06 16:23:04,741 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-02-06 16:23:04,743 WARNING src.eval.harness: Transient error (continual-resolve:40), retry 1/4 in 2s: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVA   
+2026-02-06 16:23:06,749 INFO google_genai.models: AFC is enabled with max remote calls: 10.
